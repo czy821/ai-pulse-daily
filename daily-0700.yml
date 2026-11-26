@@ -1,0 +1,42 @@
+name: AI Pulse Daily 07:00 Update
+
+on:
+  schedule:
+    # 默认：UTC 23:00 = 北京时间 (UTC+8) 每天早上 07:00
+    # 如需美西时间 (PST, UTC-8) 早上 07:00，请改为: '0 15 * * *'
+    - cron: '0 23 * * *'
+  workflow_dispatch: # 支持在 GitHub Actions 页面随时手动点击测试运行
+
+permissions:
+  contents: write
+
+jobs:
+  update-briefing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch 6 AI sources & generate 20-30 min briefing
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          # 可选：自定义兼容 OpenAI 协议的接口地址与模型（如 DeepSeek / Gemini OpenAI 兼容端点 / OpenAI）
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL || 'https://api.openai.com/v1' }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL || 'gpt-4o-mini' }}
+        run: python scripts/fetch_and_summarize.py
+
+      - name: Commit and push updated daily_briefing.json
+        run: |
+          git config user.name "AI Pulse Bot"
+          git config user.email "bot@aipulse.local"
+          git add data/daily_briefing.json
+          git diff --staged --quiet || git commit -m "chore: daily 07:00 AI briefing update ($(date -u +'%Y-%m-%d'))"
+          git push
