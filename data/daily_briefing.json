@@ -1,0 +1,215 @@
+{
+  "editionDate": "2026-11-26",
+  "items": [
+    {
+      "id": "n1",
+      "title": "顶尖商用级AI视频每秒只要5毛！中国开源新势力拿下全球第一",
+      "source": "机器之心/量子位",
+      "category": "视频生成",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-26",
+      "quickPick": true,
+      "url": "https://www.qbitai.com/2026/11/512916.html",
+      "summary": "国产开源视频模型实现30秒一镜到底高质量生成，推理成本压至0.5元/秒，支持自动镜头编排与跨镜头语义连贯，在Vbench、MotionScore等权威评测中登顶全球榜首。",
+      "problemSolved": "解决长时序、高保真AI视频生成成本高、镜头割裂、可控性弱的行业瓶颈",
+      "beginnerAnalogy": "就像用手机拍Vlog时，AI自动帮你选角度、切镜头、调运镜，还只收一杯奶茶钱。",
+      "beginnerSteps": [
+        "访问官网下载开源模型权重和推理脚本",
+        "用自带示例prompt运行demo.py，观察30秒生成效果",
+        "替换自己写的中文描述（如'无人机俯冲穿越竹林'），调整--fps=24参数后重跑"
+      ],
+      "industryImpact": "将重塑影视预演、广告制作、教育动画生产链，使中小工作室具备好莱坞级动态叙事能力，加速AIGC从‘图文’向‘时空连续体’跃迁。"
+    },
+    {
+      "id": "n2",
+      "title": "任少卿带着世界模型3.0来了！蔚来智驾训练提效5倍，座舱也用上强化学习",
+      "source": "机器之心/量子位",
+      "category": "具身智能",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-26",
+      "quickPick": true,
+      "url": "https://www.qbitai.com/2026/11/512897.html",
+      "summary": "蔚来发布World Model 3.0，融合多模态感知、物理仿真与在线强化学习，支撑智驾策略训练效率提升5倍；同时首次将该架构部署于车载座舱，实现用户意图-环境状态-动作响应的端到端闭环。",
+      "problemSolved": "解决自动驾驶仿真训练数据稀疏、泛化差，以及车机交互僵硬、无法理解上下文意图的双重难题",
+      "beginnerAnalogy": "相当于给汽车装上‘大脑+小脑+肌肉记忆’：看到路况立刻想对策（大脑），模拟千种雨天变道（小脑），听懂‘空调调凉点，顺便查下附近充电桩’（肌肉记忆）。",
+      "beginnerSteps": [
+        "在NIO GitHub组织搜索‘world-model-3.0’获取开源仿真训练框架",
+        "运行carla_env_demo.py加载预置城市交通场景",
+        "修改config.yaml中的reward_fn为custom_intent_reward，接入本地语音ASR输出作为状态输入"
+      ],
+      "industryImpact": "推动L4智驾量产周期缩短至6个月以内，催生‘可进化座舱OS’新赛道，并为服务机器人、工业AGV提供可迁移的世界建模范式。"
+    },
+    {
+      "id": "n3",
+      "title": "When Every Rollout Fails: Splicing Learner-Conditioned Options into Long-Horizon Agent RL",
+      "source": "Hugging Face",
+      "category": "强化学习",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-24",
+      "quickPick": false,
+      "url": "https://huggingface.co/papers/2611.34777",
+      "summary": "提出SPLICE方法，针对长周期任务中策略采样全失败（零奖励轨迹）问题，无需强教师模型即可在线构造局部训练目标，显著提升RL代理在复杂任务（如多步工具调用、机器人装配）中的收敛稳定性。",
+      "problemSolved": "解决长视野强化学习中因稀疏奖励导致梯度消失、训练停滞的核心痛点",
+      "beginnerAnalogy": "就像学做一桌年夜饭，老师不直接给你成品菜谱，而是把你烧糊的三道菜拆解成‘火候→调味→摆盘’片段，再拼出正确步骤。",
+      "beginnerSteps": [
+        "克隆Hugging Face仓库中的spli-ce-rl库",
+        "在minigrid_longhorizon环境运行train_spli_ce.py，观察loss曲线是否早于baseline收敛",
+        "替换reward_fn为自定义稀疏函数（仅最后一步返回1），验证SPLICE对零奖励轨迹的鲁棒性"
+      ],
+      "industryImpact": "为金融量化交易、航天器自主任务规划、手术机器人路径优化等高风险长周期决策场景提供可靠训练底座，降低AI代理落地安全门槛。"
+    },
+    {
+      "id": "n4",
+      "title": "DexEngine: Scaling Human Demonstrations into Physically Executable Whole-Robot Data",
+      "source": "Hugging Face",
+      "category": "机器人学习",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-24",
+      "quickPick": false,
+      "url": "https://huggingface.co/papers/2611.33579",
+      "summary": "DexEngine构建端到端仿真流水线，将人类手部动作视频自动转化为机械臂-灵巧手协同的物理可行轨迹，支持大规模生成kinematically valid、collision-free、动力学可执行的机器人训练数据。",
+      "problemSolved": "解决真实机器人模仿学习中数据稀缺、运动学不可行、硬件磨损成本高的根本矛盾",
+      "beginnerAnalogy": "好比把抖音美食博主颠勺视频，自动转成厨房机器人能照做的‘关节扭矩说明书’，且保证不打翻锅、不烫伤自己。",
+      "beginnerSteps": [
+        "安装DexEngine依赖（isaacgym、manipulator-sim）",
+        "运行demo_human_to_robot.py加载公开Ego4D手部数据集片段",
+        "用--export_urdf参数导出URDF文件，在Gazebo中加载验证运动可行性"
+      ],
+      "industryImpact": "加速人形机器人、康复外骨骼、精密装配机械臂的商业化进程，使制造业‘教机器人上岗’从数月缩短至数小时，催生B2B机器人技能即服务（RaaS）新生态。"
+    },
+    {
+      "id": "n5",
+      "title": "A Mesh for Every Moment",
+      "source": "Hugging Face",
+      "category": "三维重建",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-24",
+      "quickPick": false,
+      "url": "https://huggingface.co/papers/2611.34939",
+      "summary": "MEMO方法首次实现多相机同步采集下的动态场景逐帧网格重建，摒弃传统TSDF/Poisson固定体素限制，以高斯运动建模驱动每帧独立mesh生成，在人体舞蹈、流体运动等复杂形变场景达毫米级几何保真。",
+      "problemSolved": "解决动态三维重建中时间一致性差、细节丢失、无法处理大形变的长期技术瓶颈",
+      "beginnerAnalogy": "就像给高速旋转的陀螺拍X光片，不是拼静态快照，而是每一毫秒都生成一张‘会动的CT三维图’。",
+      "beginnerSteps": [
+        "下载MEMO官方Colab Notebook（含预训练权重）",
+        "上传一段自拍的挥手短视频（需≥3个不同角度同步录制）",
+        "运行reconstruct_mesh_sequence.py，观察output/frames/下每帧.obj文件的形变连续性"
+      ],
+      "industryImpact": "赋能虚拟制片实时资产生成、数字孪生工厂设备运维、AR远程协作空间锚定，使‘所见即所得’三维内容创作门槛降至手机拍摄级别。"
+    },
+    {
+      "id": "n6",
+      "title": "Tokenisation is not in APX",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "基础理论",
+      "readMinutes": 2,
+      "signal": "watch",
+      "signalLabel": "🟡 重点关注",
+      "publishedAt": "2026-11-25",
+      "quickPick": false,
+      "url": "https://arxiv.org/abs/2611.34938v1",
+      "summary": "论文严格证明：在压缩或词频似然目标下，任意多项式时间分词算法均无法保证近似最优解（即tokenisation ∉ APX），终结了‘存在高效近似分词器’的长期猜想，为LLM底层token设计敲响理论警钟。",
+      "problemSolved": "揭示当前所有主流分词器（BPE、WordPiece等）存在本质性能天花板，无法被算法改进绕过",
+      "beginnerAnalogy": "就像告诉你‘世界上没有万能钥匙能开99%的锁’——不是工艺不行，是数学上就不存在这种钥匙。",
+      "beginnerSteps": [
+        "阅读论文第1节引言与第4节核心定理（约15分钟）",
+        "用Hugging Face Tokenizers库对比BPE vs Unigram在相同语料上的压缩率差异",
+        "在transformers Trainer中启用--tokenizer_type 'sentencepiece'并记录训练收敛波动"
+      ],
+      "industryImpact": "倒逼大模型厂商转向动态分词、字节级建模或神经分词器研发，或将引发下一代Tokenizer标准竞争；对边缘AI芯片指令集设计产生深远影响。"
+    },
+    {
+      "id": "n7",
+      "title": "Attack Policy Selection can Mislead Monitor Evaluators",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "AI安全",
+      "readMinutes": 2,
+      "signal": "alert",
+      "signalLabel": "🔴 风险/格局预警",
+      "publishedAt": "2026-11-25",
+      "quickPick": false,
+      "url": "https://arxiv.org/abs/2611.34934v1",
+      "summary": "实证发现：AI安全监测器（如内容过滤、越狱检测）的误报率评估结果高度依赖攻击策略生成方式——同一监控模型在不同攻击策略下FNR从0.5%飙升至20.8%，暴露当前红蓝对抗评测体系严重失真。",
+      "problemSolved": "揭露AI安全评估中‘攻击策略偏置’导致信任幻觉，使企业误判模型真实风险水位",
+      "beginnerAnalogy": "就像用一套固定考题测试司机驾照，但题目只考直行不考倒车入库——考出来满分，上路却常撞墙。",
+      "beginnerSteps": [
+        "复现论文Table 2中OpenAI monitor在3种攻击策略（GCG、AutoDAN、PromptInject）下的FNR",
+        "使用llm-attacks库生成对应攻击样本，保存为jsonl格式",
+        "在本地部署monitor API，批量请求并统计各策略下漏检率"
+      ],
+      "industryImpact": "将迫使AI监管机构重构安全评测强制标准，加速‘动态对抗基准’（如Adversarial Arena）成为合规准入门槛，重塑AI保险、政务大模型采购决策逻辑。"
+    },
+    {
+      "id": "n8",
+      "title": "Can image generation help visual reasoning? An empirical study",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "多模态",
+      "readMinutes": 2,
+      "signal": "watch",
+      "signalLabel": "🟡 重点关注",
+      "publishedAt": "2026-11-25",
+      "quickPick": false,
+      "url": "https://arxiv.org/abs/2611.34935v1",
+      "summary": "首次系统性实证检验‘生成辅助推理’范式：在13组VLM+生成器组合中，图像生成普遍降低视觉问答准确率（平均-3.7pp），尤其损害空间关系、计数等基础能力，挑战当前多模态架构设计共识。",
+      "problemSolved": "质疑‘生成即增强’的默认假设，指出无约束图像生成可能引入噪声干扰而非认知增益",
+      "beginnerAnalogy": "就像解几何题时，AI先画一幅歪歪扭扭的辅助图，结果让你更看不懂原图了。",
+      "beginnerSteps": [
+        "在VSTAR benchmark上运行baseline_vqa.py与gen_aug_vqa.py对比",
+        "可视化生成图像与原始图像的CLIP相似度热力图",
+        "用Grad-CAM定位生成图像中被模型过度关注的伪影区域"
+      ],
+      "industryImpact": "引导多模态研究从‘堆模块’转向‘因果可信生成’，利好医疗影像诊断、工业质检等高可靠性场景的专用VLM架构演进，抑制低质AIGC污染专业推理链。"
+    },
+    {
+      "id": "n9",
+      "title": "A gene informed benchmark for BioScoring of pathology foundation models",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "生物AI",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-25",
+      "quickPick": false,
+      "url": "https://arxiv.org/abs/2611.34930v1",
+      "summary": "BioScore首次将空间转录组学（同一组织切片的基因表达图谱）作为金标准，量化病理基础模型对细胞类型、空间结构、分子通路的表征能力，填补‘黑箱模型生物学意义’评估空白。",
+      "problemSolved": "解决医学AI模型‘性能高但不可信’困境——传统指标无法回答‘模型是否学到真实生物学？’",
+      "beginnerAnalogy": "就像给医生AI出卷子，不只考它认不认得出癌细胞（准确率），更考它能不能说出‘为什么这片区域容易转移’（基因机制）。",
+      "beginnerSteps": [
+        "在bio-score.github.io下载配套TMA数据集（含HE染色图+ST基因矩阵）",
+        "用Hugging Face BioViT模型提取patch embedding，运行bioscore_eval.py",
+        "查看输出report.md中Cell Identity Recall与Spatial Coherence Score两项核心指标"
+      ],
+      "industryImpact": "推动FDA对AI病理产品审批从‘临床等效性’升级为‘生物学合理性’认证，加速肿瘤微环境解析、靶向药响应预测等精准医疗AI落地，催生‘可解释生物特征库’新型基础设施。"
+    },
+    {
+      "id": "n10",
+      "title": "Diverse Alternative Reasoning Traces for Hard Math Problems",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "数学推理",
+      "readMinutes": 2,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-25",
+      "quickPick": false,
+      "url": "https://arxiv.org/abs/2611.34928v1",
+      "summary": "DART方法从被验证器拒绝的错误推理链出发，通过不确定性加权分解与多样性重采样，挖掘高价值替代路径，显著提升LLM在IMO级难题上的求解成功率，在MATH数据集上相对基线+12.4%。",
+      "problemSolved": "突破数学推理中‘正样本稀疏’瓶颈，将失败轨迹转化为高质量训练信号，降低对人工标注答案的依赖",
+      "beginnerAnalogy": "就像奥数教练不只讲标准解法，更带学生分析‘这道错题里哪一步其实很有创意？’，然后沿着那步另辟蹊径。",
+      "beginnerSteps": [
+        "在math-llm-hub中拉取dart-trace-miner工具包",
+        "用openai/gpt-4-turbo对MATH test set生成100条初始trace",
+        "运行dart_mine.py筛选top-5替代路径，注入到QLoRA微调数据集"
+      ],
+      "industryImpact": "为金融衍生品定价、密码学协议验证、航天轨道计算等高确定性领域提供可信推理引擎，推动‘形式化AI助手’进入工程核心环路。"
+    }
+  ]
+}
