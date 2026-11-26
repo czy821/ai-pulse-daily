@@ -1,16 +1,17 @@
 """
-AI Pulse 07:00 — 每日多源抓取、20-30分钟阅读控时与深度分析生成脚本
+AI Pulse 07:00 — 每日多源抓取、20-30分钟阅读控时与深度分析生成脚本（全源修复版）
 信息源覆盖：
 1. 机器之心 / 量子位 (RSS)
-2. RadarAI / AI Radar (RSS/Web)
+2. RadarAI / Agents Radar (GitHub Issues API)
 3. GitHub Trending AI Agents (GitHub Search API)
 4. Hugging Face Daily Papers (Official JSON API)
 5. arXiv cs.AI / cs.CL / cs.LG (Official Atom API)
-6. AI News / The Batch (RSS)
+6. AI News / The Batch (AINews RSS + The Batch Web Fallback)
 """
 
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List
@@ -20,7 +21,14 @@ import requests
 from openai import OpenAI
 
 TIMEOUT = 20
-HEADERS = {"User-Agent": "AI-Pulse-0700-Bot/1.0"}
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/130.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, application/xml, text/html, */*",
+}
 
 
 def fetch_rss(url: str, source_name: str, limit: int = 5) -> List[Dict[str, str]]:
@@ -30,15 +38,71 @@ def fetch_rss(url: str, source_name: str, limit: int = 5) -> List[Dict[str, str]
         resp.raise_for_status()
         feed = feedparser.parse(resp.content)
         for entry in feed.entries[:limit]:
+            summary_raw = entry.get("summary", "") or entry.get("description", "")
+            summary_clean = re.sub(r"<[^>]+>", " ", summary_raw)
+            summary_clean = re.sub(r"\s+", " ", summary_clean).strip()[:500]
             items.append({
                 "source": source_name,
                 "title": entry.get("title", "").strip(),
-                "summary": entry.get("summary", "")[:500].strip(),
+                "summary": summary_clean,
                 "url": entry.get("link", "").strip(),
-                "publishedAt": entry.get("published", "")[:10] or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "publishedAt": entry.get("published", "")[:10]
+                or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             })
     except Exception as exc:
         print(f"[WARN] RSS fetch failed for {source_name}: {exc}", file=sys.stderr)
+    return items
+
+
+def fetch_the_batch_fallback(limit: int = 3) -> List[Dict[str, str]]:
+    items: List[Dict[str, str]] = []
+    try:
+        resp = requests.get("https://www.deeplearning.ai/the-batch/", headers=HEADERS, timeout=TIMEOUT)
+        resp.raise_for_status()
+        matches = re.findall(
+            r'href="(/the-batch/[^"]+)"[^>]*>([^<]{15,140})<',
+            resp.text,
+        )
+        seen = set()
+        for path, title in matches:
+            if "/tag/" in path or path in seen:
+                continue
+            seen.add(path)
+            items.append({
+                "source": "AI News / The Batch",
+                "title": re.sub(r"\s+", " ", title).strip(),
+                "summary": "DeepLearning.AI The Batch AI News & Insights",
+                "url": f"https://www.deeplearning.ai{path}",
+                "publishedAt": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            })
+            if len(items) >= limit:
+                break
+    except Exception as exc:
+        print(f"[WARN] The Batch web fetch failed: {exc}", file=sys.stderr)
+    return items
+
+
+def fetch_radar_ai(limit: int = 3) -> List[Dict[str, str]]:
+    items: List[Dict[str, str]] = []
+    try:
+        resp = requests.get(
+            "https://api.github.com/repos/duanyytop/agents-radar/issues",
+            params={"state": "open", "per_page": limit},
+            headers={**HEADERS, "Accept": "application/vnd.github+json"},
+            timeout=TIMEOUT,
+        )
+        resp.raise_for_status()
+        for issue in resp.json()[:limit]:
+            items.append({
+                "source": "RadarAI",
+                "title": issue.get("title", "").strip(),
+                "summary": (issue.get("body") or "")[:500].strip(),
+                "url": issue.get("html_url", "").strip(),
+                "publishedAt": str(issue.get("created_at", ""))[:10]
+                or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            })
+    except Exception as exc:
+        print(f"[WARN] RadarAI fetch failed: {exc}", file=sys.stderr)
     return items
 
 
@@ -65,7 +129,8 @@ def fetch_huggingface_papers(limit: int = 5) -> List[Dict[str, str]]:
                 "title": paper.get("title", "").strip(),
                 "summary": paper.get("summary", "")[:500].strip(),
                 "url": f"https://huggingface.co/papers/{pid}" if pid else "https://huggingface.co/papers",
-                "publishedAt": str(row.get("publishedAt", ""))[:10] or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "publishedAt": str(row.get("publishedAt", ""))[:10]
+                or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             })
     except Exception as exc:
         print(f"[WARN] Hugging Face API failed: {exc}", file=sys.stderr)
@@ -76,11 +141,17 @@ def fetch_github_trending(limit: int = 5) -> List[Dict[str, str]]:
     items: List[Dict[str, str]] = []
     try:
         since = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
-        url = (
-            "https://api.github.com/search/repositories"
-            f"?q=topic:ai-agent+OR+topic:llm+pushed:>={since}&sort=stars&order=desc&per_page={limit}"
+        resp = requests.get(
+            "https://api.github.com/search/repositories",
+            params={
+                "q": f"ai-agent pushed:>={since}",
+                "sort": "stars",
+                "order": "desc",
+                "per_page": limit,
+            },
+            headers={**HEADERS, "Accept": "application/vnd.github+json"},
+            timeout=TIMEOUT,
         )
-        resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
         resp.raise_for_status()
         for repo in resp.json().get("items", [])[:limit]:
             items.append({
@@ -99,8 +170,9 @@ def collect_all_sources() -> List[Dict[str, str]]:
     raw: List[Dict[str, str]] = []
     raw.extend(fetch_rss("https://www.qbitai.com/feed", "机器之心/量子位", limit=5))
     raw.extend(fetch_rss("https://www.jiqizhixin.com/rss", "机器之心/量子位", limit=4))
-    raw.extend(fetch_rss("https://www.deeplearning.ai/the-batch/rss/", "AI News / The Batch", limit=4))
-    raw.extend(fetch_rss("https://aicaramba.co.uk/feed", "RadarAI", limit=4))
+    raw.extend(fetch_rss("https://news.smol.ai/rss.xml", "AI News / The Batch", limit=4))
+    raw.extend(fetch_the_batch_fallback(limit=2))
+    raw.extend(fetch_radar_ai(limit=3))
     raw.extend(fetch_github_trending(limit=5))
     raw.extend(fetch_huggingface_papers(limit=5))
     raw.extend(fetch_arxiv(limit=6))
