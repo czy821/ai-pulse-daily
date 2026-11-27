@@ -1,12 +1,18 @@
 """
-AI Pulse 07:00 — 每日多源抓取、20-30分钟阅读控时与深度分析生成脚本（全源修复版）
+AI Pulse 07:00 — 每日多源抓取、20-30分钟阅读控时与全板块同步生成脚本
 信息源覆盖：
 1. 机器之心 / 量子位 (RSS)
 2. RadarAI / Agents Radar (GitHub Issues API)
 3. GitHub Trending AI Agents (GitHub Search API)
 4. Hugging Face Daily Papers (Official JSON API)
 5. arXiv cs.AI / cs.CL / cs.LG (Official Atom API)
-6. AI News / The Batch (AINews RSS + The Batch Web Fallback)
+6. AI News / The Batch (AINews RSS)
+
+同步生成板块：
+- items (9-10 篇，阅读量 20-30 分钟)
+- editorialTakeaways (今日 07:00 主编核心研判 2 条)
+- foresightTracks (4 大未来 AI 强相关产业前瞻)
+- workshops (4 个当日最值得小白上手的新工具/工作法)
 """
 
 import json
@@ -51,34 +57,6 @@ def fetch_rss(url: str, source_name: str, limit: int = 5) -> List[Dict[str, str]
             })
     except Exception as exc:
         print(f"[WARN] RSS fetch failed for {source_name}: {exc}", file=sys.stderr)
-    return items
-
-
-def fetch_the_batch_fallback(limit: int = 3) -> List[Dict[str, str]]:
-    items: List[Dict[str, str]] = []
-    try:
-        resp = requests.get("https://www.deeplearning.ai/the-batch/", headers=HEADERS, timeout=TIMEOUT)
-        resp.raise_for_status()
-        matches = re.findall(
-            r'href="(/the-batch/[^"]+)"[^>]*>([^<]{15,140})<',
-            resp.text,
-        )
-        seen = set()
-        for path, title in matches:
-            if "/tag/" in path or path in seen:
-                continue
-            seen.add(path)
-            items.append({
-                "source": "AI News / The Batch",
-                "title": re.sub(r"\s+", " ", title).strip(),
-                "summary": "DeepLearning.AI The Batch AI News & Insights",
-                "url": f"https://www.deeplearning.ai{path}",
-                "publishedAt": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-            })
-            if len(items) >= limit:
-                break
-    except Exception as exc:
-        print(f"[WARN] The Batch web fetch failed: {exc}", file=sys.stderr)
     return items
 
 
@@ -170,13 +148,20 @@ def collect_all_sources() -> List[Dict[str, str]]:
     raw: List[Dict[str, str]] = []
     raw.extend(fetch_rss("https://www.qbitai.com/feed", "机器之心/量子位", limit=5))
     raw.extend(fetch_rss("https://www.jiqizhixin.com/rss", "机器之心/量子位", limit=4))
-    raw.extend(fetch_rss("https://news.smol.ai/rss.xml", "AI News / The Batch", limit=4))
-    raw.extend(fetch_the_batch_fallback(limit=2))
+    raw.extend(fetch_rss("https://news.smol.ai/rss.xml", "AI News / The Batch", limit=5))
     raw.extend(fetch_radar_ai(limit=3))
     raw.extend(fetch_github_trending(limit=5))
     raw.extend(fetch_huggingface_papers(limit=5))
     raw.extend(fetch_arxiv(limit=6))
     return [item for item in raw if item.get("title") and item.get("url")]
+
+
+def clean_json_text(text: str) -> str:
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
+    return cleaned.strip()
 
 
 def synthesize_briefing(raw_items: List[Dict[str, str]]) -> Dict[str, Any]:
@@ -191,14 +176,20 @@ def synthesize_briefing(raw_items: List[Dict[str, str]]) -> Dict[str, Any]:
     cn_tz = timezone(timedelta(hours=8))
     today_label = datetime.now(cn_tz).strftime("%Y年%m月%d日 · 早间 07:00 已完成6源聚合")
 
-    system_prompt = """你是 AI Pulse 07:00 主编。请从原始多源资讯中去重、筛选出 9-10 条最高信号价值的条目，严格满足：
-1. 所有条目的 readMinutes（每篇 2 或 3 分钟）总和必须严格控制在 22 到 28 分钟之间（处于 20-30 分钟区间）；
+    system_prompt = """你是 AI Pulse 07:00 主编。请从原始多源资讯中去重、筛选出 9-10 条最高信号价值的条目，并基于今日精选条目**同步生成**「主编核心研判」「产业前瞻」和「小白上手工坊」四个板块，严格满足：
+1. 所有 items 的 readMinutes（每篇 2 或 3 分钟）总和必须严格控制在 22 到 28 分钟之间（处于 20-30 分钟区间）；
 2. 尽量覆盖 6 大信息源（机器之心/量子位、RadarAI、GitHub Trending、Hugging Face、arXiv (cs.AI/cs.CL/cs.LG)、AI News / The Batch）；
-3. 每条必须严格保留原始 url，不可捏造链接；
-4. 每条必须包含：problemSolved（这个新工具/技术解决什么问题）、beginnerAnalogy（小白一句话通俗类比）、beginnerSteps（3条具体可执行的零基础上手步骤数组）、industryImpact（对未来AI强相关产业的前瞻影响）；
-5. 仅输出合法 JSON，格式：
+3. 每条 items 和 workshops 必须严格保留原始 url，不可捏造链接；
+4. editorialTakeaways 提炼 2 条今日核心主线；
+5. foresightTracks 必须紧密围绕今日 items 归纳出 4 个未来 AI 强相关产业赛道（附 75-98 的热度评分、关联今日新闻短标题、核心逻辑、受益产业链与普通人切入建议）；
+6. workshops 必须从今日 items 中挑出 4 个最值得零基础小白立刻体验的新工具/新方法，提供通俗类比、3 步实操清单和可直接一键复制的 Prompt 或命令模板；
+7. 仅输出合法 JSON，严格遵循以下结构：
 {
   "editionDate": "字符串",
+  "editorialTakeaways": [
+    {"label": "主线一（简短主题）", "text": "基于今日资讯的研判说明"},
+    {"label": "主线二（简短主题）", "text": "基于今日资讯的研判说明"}
+  ],
   "items": [
     {
       "id": "n1",
@@ -217,6 +208,30 @@ def synthesize_briefing(raw_items: List[Dict[str, str]]) -> Dict[str, Any]:
       "beginnerSteps": ["第1步...", "第2步...", "第3步..."],
       "industryImpact": "未来产业影响"
     }
+  ],
+  "foresightTracks": [
+    {
+      "title": "01. 赛道名称",
+      "horizon": "3–12 个月 / 6–18 个月",
+      "heatScore": 92,
+      "relatedNews": ["今日关联新闻短标题1", "今日关联新闻短标题2"],
+      "coreLogic": "核心演进逻辑",
+      "beneficiaries": "强相关受益产业链",
+      "beginnerOpportunity": "普通人/开发者切入建议"
+    }
+  ],
+  "workshops": [
+    {
+      "id": "w1",
+      "toolName": "今日工具/方法名称",
+      "tag": "零门槛 · 5分钟上手",
+      "problem": "解决什么问题",
+      "analogy": "小白一句话听懂",
+      "promptLabel": "一键复制 · 小白实操模板",
+      "copyText": "可直接复制使用的 Prompt 或安装命令",
+      "steps": ["第1步具体操作", "第2步具体操作", "第3步具体操作"],
+      "link": "对应今日资讯的原始URL"
+    }
   ]
 }"""
 
@@ -232,7 +247,7 @@ def synthesize_briefing(raw_items: List[Dict[str, str]]) -> Dict[str, Any]:
             },
         ],
     )
-    content = response.choices[0].message.content or "{}"
+    content = clean_json_text(response.choices[0].message.content or "{}")
     data = json.loads(content)
     data.setdefault("editionDate", today_label)
     if not data.get("items"):
@@ -248,7 +263,11 @@ def main() -> None:
 
     briefing = synthesize_briefing(raw_items)
     total_mins = sum(int(i.get("readMinutes", 2)) for i in briefing["items"])
-    print(f"[INFO] Generated {len(briefing['items'])} curated items ({total_mins} min total).")
+    print(
+        f"[INFO] Generated {len(briefing['items'])} curated items ({total_mins} min), "
+        f"{len(briefing.get('foresightTracks', []))} foresight tracks, "
+        f"{len(briefing.get('workshops', []))} workshops."
+    )
 
     os.makedirs("data", exist_ok=True)
     with open("data/daily_briefing.json", "w", encoding="utf-8") as f:
