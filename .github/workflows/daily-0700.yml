@@ -4,7 +4,7 @@ on:
   schedule:
     # 默认：UTC 23:00 = 北京时间 (UTC+8) 每天早上 07:00
     # 如需美西时间 (PST, UTC-8) 早上 07:00，请改为: '0 15 * * *'
-    - cron: '0 23 * * *'
+    - cron: '43 22 * * *'
   workflow_dispatch: # 支持在 GitHub Actions 页面随时手动点击测试运行
 
 permissions:
