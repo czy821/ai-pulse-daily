@@ -301,6 +301,15 @@
               <i data-lucide="bookmark" class="w-4 h-4"></i>
               <span>收藏 (<span id="bookmarkCount">0</span>)</span>
             </button>
+            <button id="exportBookmarksBtn" class="px-2.5 py-2 rounded-xl border border-stone-400/30 hover:border-amber-500/60 text-xs flex items-center gap-1 transition text-body-secondary hover:text-amber-700 dark:hover:text-amber-300" title="导出收藏夹为 JSON 备份">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">导出收藏</span>
+            </button>
+            <label class="px-2.5 py-2 rounded-xl border border-stone-400/30 hover:border-teal-600/50 text-xs flex items-center gap-1 transition text-body-secondary hover:text-teal-700 dark:hover:text-teal-300 cursor-pointer" title="从 JSON 备份合并导入收藏夹">
+              <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">导入收藏</span>
+              <input id="importBookmarksInput" type="file" accept=".json" class="hidden" />
+            </label>
           </div>
         </div>
 
@@ -1698,6 +1707,68 @@ if __name__ == "__main__":
         }
         renderSourceFilters();
         renderNewsList();
+      });
+
+      document.getElementById('exportBookmarksBtn').addEventListener('click', () => {
+        if (!state.savedBookmarks || state.savedBookmarks.length === 0) {
+          showToast('当前收藏夹为空，先收藏几条资讯吧');
+          return;
+        }
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          version: 2,
+          bookmarks: state.savedBookmarks
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateTag = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `ai_pulse_bookmarks_${dateTag}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`已导出 ${state.savedBookmarks.length} 条收藏备份`);
+      });
+
+      document.getElementById('importBookmarksInput').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.bookmarks) ? parsed.bookmarks : null);
+            if (!list) {
+              showToast('收藏备份格式不正确');
+              return;
+            }
+            const existingKeys = new Set(state.savedBookmarks.map(b => b.bookmarkKey));
+            let added = 0;
+            list.forEach(item => {
+              if (!item || !item.title) return;
+              const key = item.bookmarkKey || item.url || `imported::${item.title}`;
+              if (!existingKeys.has(key)) {
+                existingKeys.add(key);
+                state.savedBookmarks.push({
+                  ...item,
+                  bookmarkKey: key,
+                  savedEdition: item.savedEdition || '导入备份'
+                });
+                added++;
+              }
+            });
+            persistState();
+            updateReadingBudgetUI();
+            renderNewsList();
+            showToast(added > 0 ? `成功合并导入 ${added} 条收藏（已自动去重）` : '备份中的收藏均已存在，无需重复导入');
+          } catch (err) {
+            showToast('收藏备份 JSON 解析失败');
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
       });
 
       document.getElementById('resetProgressBtn').addEventListener('click', () => {
