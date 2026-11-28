@@ -386,6 +386,29 @@
         </div>
       </div>
 
+      <!-- Foresight Bookmark & Archive Bar -->
+      <div class="glass-card rounded-2xl p-3.5 sm:px-5 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-sm font-bold">
+          <i data-lucide="telescope" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
+          <span id="foresightListLabel">今日产业前瞻赛道</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="foresightBookmarkFilterBtn" class="px-3 py-1.5 rounded-xl border border-stone-400/30 hover:border-amber-500/60 text-xs sm:text-sm flex items-center gap-1.5 transition">
+            <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+            <span>收藏 (<span id="foresightBookmarkCount">0</span>)</span>
+          </button>
+          <button id="exportForesightBtn" class="px-2.5 py-1.5 rounded-xl border border-stone-400/30 hover:border-amber-500/60 text-xs flex items-center gap-1 transition text-body-secondary hover:text-amber-700 dark:hover:text-amber-300" title="导出产业前瞻收藏存档为 JSON">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>导出存档</span>
+          </button>
+          <label class="px-2.5 py-1.5 rounded-xl border border-stone-400/30 hover:border-teal-600/50 text-xs flex items-center gap-1 transition text-body-secondary hover:text-teal-700 dark:hover:text-teal-300 cursor-pointer" title="从 JSON 存档合并导入产业前瞻收藏">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+            <span>导入存档</span>
+            <input id="importForesightInput" type="file" accept=".json" class="hidden" />
+          </label>
+        </div>
+      </div>
+
       <!-- 4 Industry Foresight Cards -->
       <div id="foresightGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
     </section>
@@ -405,6 +428,29 @@
           <div class="text-xs text-body-muted">今日实操完成度</div>
           <div id="workshopProgressText" class="text-2xl font-extrabold text-teal-700 dark:text-teal-400 font-mono">0%</div>
           <div class="text-[11px] text-body-muted" id="workshopStepsCount">0 / 12 步</div>
+        </div>
+      </div>
+
+      <!-- Workshop Bookmark & Archive Bar -->
+      <div class="glass-card rounded-2xl p-3.5 sm:px-5 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-sm font-bold">
+          <i data-lucide="sparkles" class="w-4 h-4 text-teal-700 dark:text-teal-400"></i>
+          <span id="workshopListLabel">今日小白上手工具</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="workshopBookmarkFilterBtn" class="px-3 py-1.5 rounded-xl border border-stone-400/30 hover:border-amber-500/60 text-xs sm:text-sm flex items-center gap-1.5 transition">
+            <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+            <span>收藏 (<span id="workshopBookmarkCount">0</span>)</span>
+          </button>
+          <button id="exportWorkshopBtn" class="px-2.5 py-1.5 rounded-xl border border-stone-400/30 hover:border-amber-500/60 text-xs flex items-center gap-1 transition text-body-secondary hover:text-amber-700 dark:hover:text-amber-300" title="导出小白工坊收藏与实操存档为 JSON">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>导出存档</span>
+          </button>
+          <label class="px-2.5 py-1.5 rounded-xl border border-stone-400/30 hover:border-teal-600/50 text-xs flex items-center gap-1 transition text-body-secondary hover:text-teal-700 dark:hover:text-teal-300 cursor-pointer" title="从 JSON 存档合并导入小白工坊收藏">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+            <span>导入存档</span>
+            <input id="importWorkshopInput" type="file" accept=".json" class="hidden" />
+          </label>
         </div>
       </div>
 
@@ -906,8 +952,12 @@ if __name__ == "__main__":
       searchQuery: '',
       readingMode: 'standard',
       onlyBookmarked: false,
+      onlyBookmarkedForesight: false,
+      onlyBookmarkedWorkshop: false,
       readIds: new Set(),          // 按当前期号独立存储，每日更新自动重置
       savedBookmarks: [],          // 跨日期持久保存完整资讯快照，不被新资讯覆盖
+      savedForesights: [],         // 跨日期持久保存产业前瞻快照
+      savedWorkshops: [],          // 跨日期持久保存小白上手工坊快照
       checkedSteps: {},            // 按当前期号独立存储小白工坊打卡进度
       theme: 'light',
       fontSize: 'normal',
@@ -936,6 +986,29 @@ if __name__ == "__main__":
       return state.savedBookmarks.some(b => b.bookmarkKey === key);
     }
 
+    function getForesightKey(track) {
+      if (!track) return '';
+      if (track.bookmarkKey) return track.bookmarkKey;
+      const cleanTitle = String(track.title || '').replace(/^\d+\.\s*/, '').trim();
+      return `${getEditionKey()}::${cleanTitle}`;
+    }
+
+    function isForesightBookmarked(track) {
+      const key = getForesightKey(track);
+      return state.savedForesights.some(b => b.bookmarkKey === key);
+    }
+
+    function getWorkshopKey(w) {
+      if (!w) return '';
+      if (w.bookmarkKey) return w.bookmarkKey;
+      return `${(w.link || getEditionKey()).trim()}::${String(w.toolName || '').trim()}`;
+    }
+
+    function isWorkshopBookmarked(w) {
+      const key = getWorkshopKey(w);
+      return state.savedWorkshops.some(b => b.bookmarkKey === key);
+    }
+
     function loadPersistedState() {
       const editionKey = getEditionKey();
       try {
@@ -957,6 +1030,18 @@ if __name__ == "__main__":
         state.savedBookmarks = [];
       }
       try {
+        const rawFs = JSON.parse(localStorage.getItem('aipulse_foresight_bookmarks_v1') || '[]');
+        state.savedForesights = Array.isArray(rawFs) ? rawFs : [];
+      } catch (e) {
+        state.savedForesights = [];
+      }
+      try {
+        const rawWs = JSON.parse(localStorage.getItem('aipulse_workshop_bookmarks_v1') || '[]');
+        state.savedWorkshops = Array.isArray(rawWs) ? rawWs : [];
+      } catch (e) {
+        state.savedWorkshops = [];
+      }
+      try {
         const savedTheme = localStorage.getItem('aipulse_theme_warm');
         if (savedTheme === 'light' || savedTheme === 'dark') state.theme = savedTheme;
       } catch (e) {}
@@ -968,6 +1053,8 @@ if __name__ == "__main__":
         localStorage.setItem(`aipulse_read_${editionKey}`, JSON.stringify([...state.readIds]));
         localStorage.setItem(`aipulse_steps_${editionKey}`, JSON.stringify(state.checkedSteps));
         localStorage.setItem('aipulse_bookmarks_v2', JSON.stringify(state.savedBookmarks));
+        localStorage.setItem('aipulse_foresight_bookmarks_v1', JSON.stringify(state.savedForesights));
+        localStorage.setItem('aipulse_workshop_bookmarks_v1', JSON.stringify(state.savedWorkshops));
         localStorage.setItem('aipulse_theme_warm', state.theme);
       } catch (e) {}
     }
@@ -1316,16 +1403,52 @@ if __name__ == "__main__":
       if (fh) {
         fh.textContent = `从今日 ${BRIEFING_DATA.items.length} 条高信号资讯，透视 ${FORESIGHT_TRACKS.length} 大爆发赛道`;
       }
+      const bmCountEl = document.getElementById('foresightBookmarkCount');
+      if (bmCountEl) bmCountEl.textContent = state.savedForesights.length;
+
+      const list = state.onlyBookmarkedForesight ? state.savedForesights : FORESIGHT_TRACKS;
+      const labelEl = document.getElementById('foresightListLabel');
+      if (labelEl) {
+        labelEl.textContent = state.onlyBookmarkedForesight
+          ? `我的产业前瞻收藏夹 · 共 ${list.length} 条（跨日永久保留）`
+          : `今日产业前瞻赛道 · 共 ${list.length} 条`;
+      }
+
       const grid = document.getElementById('foresightGrid');
-      grid.innerHTML = FORESIGHT_TRACKS.map(track => `
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="md:col-span-2 glass-card rounded-2xl p-10 text-center space-y-2">
+            <p class="text-base font-semibold">产业前瞻收藏夹暂时为空</p>
+            <p class="text-xs text-body-muted">点击任意赛道卡片右上角的书签按钮即可永久收藏，并支持导出 JSON 存档。</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = list.map(track => {
+        const key = getForesightKey(track);
+        const encKey = encodeURIComponent(key);
+        const isBm = isForesightBookmarked(track);
+        return `
         <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <span class="text-xs font-mono text-amber-700 dark:text-amber-400">${track.horizon}</span>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-mono text-amber-700 dark:text-amber-400">${track.horizon}</span>
+                ${state.onlyBookmarkedForesight && track.savedEdition ? `<span class="px-2 py-0.5 rounded-lg text-[11px] bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20">收藏于 ${track.savedEdition}</span>` : ''}
+              </div>
               <h3 class="text-lg font-bold mt-0.5">${track.title}</h3>
             </div>
-            <div class="px-2.5 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 font-mono text-xs font-bold shrink-0">
-              热度 ${track.heatScore}
+            <div class="flex items-center gap-1.5 shrink-0">
+              <div class="px-2.5 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 font-mono text-xs font-bold">
+                热度 ${track.heatScore}
+              </div>
+              <button data-action="toggle-foresight-bm" data-key="${encKey}" class="p-1.5 rounded-xl border transition ${
+                isBm ? 'bg-amber-500/20 border-amber-500/50 text-amber-700 dark:text-amber-300' : 'border-stone-400/25 text-body-muted hover:border-amber-500/50'
+              }" title="${isBm ? '取消收藏赛道' : '永久收藏赛道'}" aria-label="收藏产业前瞻">
+                <i data-lucide="bookmark" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
           <div class="flex flex-wrap gap-1.5">
@@ -1346,17 +1469,46 @@ if __name__ == "__main__":
             </div>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
+      lucide.createIcons();
     }
 
     function renderWorkshop() {
+      const bmCountEl = document.getElementById('workshopBookmarkCount');
+      if (bmCountEl) bmCountEl.textContent = state.savedWorkshops.length;
+
+      const list = state.onlyBookmarkedWorkshop ? state.savedWorkshops : WORKSHOPS;
+      const labelEl = document.getElementById('workshopListLabel');
+      if (labelEl) {
+        labelEl.textContent = state.onlyBookmarkedWorkshop
+          ? `我的小白工坊收藏夹 · 共 ${list.length} 个（跨日永久保留）`
+          : `今日小白上手工具 · 共 ${list.length} 个`;
+      }
+
       const grid = document.getElementById('workshopGrid');
       let totalSteps = 0;
       let doneSteps = 0;
 
-      grid.innerHTML = WORKSHOPS.map(w => {
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="lg:col-span-2 glass-card rounded-2xl p-10 text-center space-y-2">
+            <p class="text-base font-semibold">小白工坊收藏夹暂时为空</p>
+            <p class="text-xs text-body-muted">点击任意工具卡片右上角的书签按钮即可永久收藏，并支持导出/导入实操存档。</p>
+          </div>
+        `;
+        document.getElementById('workshopProgressText').textContent = '0%';
+        document.getElementById('workshopStepsCount').textContent = '0 / 0 步';
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = list.map(w => {
+        const wKey = getWorkshopKey(w);
+        const encKey = encodeURIComponent(wKey);
+        const isBm = isWorkshopBookmarked(w);
         const stepsHtml = (w.steps || []).map((stepText, idx) => {
-          const stepKey = `${w.id}_${idx}`;
+          const stepKey = `${w.id || wKey}_${idx}`;
           totalSteps++;
           const checked = !!state.checkedSteps[stepKey];
           if (checked) doneSteps++;
@@ -1374,12 +1526,22 @@ if __name__ == "__main__":
           <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
             <div class="flex items-start justify-between gap-2">
               <div>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-teal-600/12 text-teal-800 dark:text-teal-300 border border-teal-600/25">${w.tag}</span>
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-teal-600/12 text-teal-800 dark:text-teal-300 border border-teal-600/25">${w.tag}</span>
+                  ${state.onlyBookmarkedWorkshop && w.savedEdition ? `<span class="px-2 py-0.5 rounded-full text-[11px] bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20">收藏于 ${w.savedEdition}</span>` : ''}
+                </div>
                 <h3 class="text-lg font-bold mt-1.5">${w.toolName}</h3>
               </div>
-              <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-xs text-amber-700 dark:text-amber-300 hover:underline flex items-center gap-1 shrink-0">
-                来源 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              </a>
+              <div class="flex items-center gap-2 shrink-0">
+                <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-xs text-amber-700 dark:text-amber-300 hover:underline flex items-center gap-1">
+                  来源 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+                <button data-action="toggle-workshop-bm" data-key="${encKey}" class="p-1.5 rounded-xl border transition ${
+                  isBm ? 'bg-amber-500/20 border-amber-500/50 text-amber-700 dark:text-amber-300' : 'border-stone-400/25 text-body-muted hover:border-amber-500/50'
+                }" title="${isBm ? '取消收藏工具' : '永久收藏工具'}" aria-label="收藏小白工坊工具">
+                  <i data-lucide="bookmark" class="w-4 h-4"></i>
+                </button>
+              </div>
             </div>
 
             <div class="space-y-1.5 text-xs sm:text-sm">
@@ -1667,6 +1829,42 @@ if __name__ == "__main__":
             persistState();
             renderNewsList();
             updateReadingBudgetUI();
+          } else if (action === 'toggle-foresight-bm') {
+            const idx = state.savedForesights.findIndex(b => b.bookmarkKey === key);
+            if (idx >= 0) {
+              state.savedForesights.splice(idx, 1);
+              showToast('已从产业前瞻收藏夹移除');
+            } else {
+              const targetTrack = FORESIGHT_TRACKS.find(t => getForesightKey(t) === key);
+              if (targetTrack) {
+                state.savedForesights.unshift({
+                  ...targetTrack,
+                  bookmarkKey: key,
+                  savedEdition: getEditionKey()
+                });
+                showToast('已永久收藏该产业前瞻赛道');
+              }
+            }
+            persistState();
+            renderForesight();
+          } else if (action === 'toggle-workshop-bm') {
+            const idx = state.savedWorkshops.findIndex(b => b.bookmarkKey === key);
+            if (idx >= 0) {
+              state.savedWorkshops.splice(idx, 1);
+              showToast('已从小白工坊收藏夹移除');
+            } else {
+              const targetWs = WORKSHOPS.find(w => getWorkshopKey(w) === key);
+              if (targetWs) {
+                state.savedWorkshops.unshift({
+                  ...targetWs,
+                  bookmarkKey: key,
+                  savedEdition: getEditionKey()
+                });
+                showToast('已永久收藏该小白上手工具');
+              }
+            }
+            persistState();
+            renderWorkshop();
           } else if (action === 'open-modal') {
             openDetailModal(key);
           }
@@ -1786,6 +1984,156 @@ if __name__ == "__main__":
             showToast(added > 0 ? `成功合并导入 ${added} 条收藏（已自动去重）` : '备份中的收藏均已存在，无需重复导入');
           } catch (err) {
             showToast('收藏备份 JSON 解析失败');
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+      });
+
+      document.getElementById('foresightBookmarkFilterBtn').addEventListener('click', () => {
+        state.onlyBookmarkedForesight = !state.onlyBookmarkedForesight;
+        const btn = document.getElementById('foresightBookmarkFilterBtn');
+        if (state.onlyBookmarkedForesight) {
+          btn.classList.add('bg-amber-500/20', 'border-amber-500/60', 'text-amber-800', 'dark:text-amber-300');
+        } else {
+          btn.classList.remove('bg-amber-500/20', 'border-amber-500/60', 'text-amber-800', 'dark:text-amber-300');
+        }
+        renderForesight();
+      });
+
+      document.getElementById('exportForesightBtn').addEventListener('click', () => {
+        const exportList = state.savedForesights.length > 0 ? state.savedForesights : FORESIGHT_TRACKS.map(t => ({
+          ...t,
+          bookmarkKey: getForesightKey(t),
+          savedEdition: getEditionKey()
+        }));
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          type: 'foresight_archive',
+          version: 1,
+          foresights: exportList
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ai_pulse_foresight_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(state.savedForesights.length > 0 ? `已导出 ${exportList.length} 条收藏的产业前瞻存档` : `收藏夹为空，已导出今日 ${exportList.length} 条产业前瞻存档`);
+      });
+
+      document.getElementById('importForesightInput').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.foresights) ? parsed.foresights : null);
+            if (!list) {
+              showToast('产业前瞻存档格式不正确');
+              return;
+            }
+            const existingKeys = new Set(state.savedForesights.map(b => b.bookmarkKey));
+            let added = 0;
+            list.forEach(item => {
+              if (!item || !item.title) return;
+              const key = item.bookmarkKey || `imported::${item.title}`;
+              if (!existingKeys.has(key)) {
+                existingKeys.add(key);
+                state.savedForesights.push({
+                  ...item,
+                  bookmarkKey: key,
+                  savedEdition: item.savedEdition || '导入存档'
+                });
+                added++;
+              }
+            });
+            persistState();
+            renderForesight();
+            showToast(added > 0 ? `成功合并导入 ${added} 条产业前瞻存档` : '存档中的赛道均已存在，无需重复导入');
+          } catch (err) {
+            showToast('产业前瞻存档 JSON 解析失败');
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+      });
+
+      document.getElementById('workshopBookmarkFilterBtn').addEventListener('click', () => {
+        state.onlyBookmarkedWorkshop = !state.onlyBookmarkedWorkshop;
+        const btn = document.getElementById('workshopBookmarkFilterBtn');
+        if (state.onlyBookmarkedWorkshop) {
+          btn.classList.add('bg-amber-500/20', 'border-amber-500/60', 'text-amber-800', 'dark:text-amber-300');
+        } else {
+          btn.classList.remove('bg-amber-500/20', 'border-amber-500/60', 'text-amber-800', 'dark:text-amber-300');
+        }
+        renderWorkshop();
+      });
+
+      document.getElementById('exportWorkshopBtn').addEventListener('click', () => {
+        const exportList = state.savedWorkshops.length > 0 ? state.savedWorkshops : WORKSHOPS.map(w => ({
+          ...w,
+          bookmarkKey: getWorkshopKey(w),
+          savedEdition: getEditionKey()
+        }));
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          type: 'workshop_archive',
+          version: 1,
+          workshops: exportList,
+          checkedSteps: state.checkedSteps
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ai_pulse_workshops_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(state.savedWorkshops.length > 0 ? `已导出 ${exportList.length} 个收藏的小白工坊存档` : `收藏夹为空，已导出今日 ${exportList.length} 个小白工坊存档`);
+      });
+
+      document.getElementById('importWorkshopInput').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.workshops) ? parsed.workshops : null);
+            if (!list) {
+              showToast('小白工坊存档格式不正确');
+              return;
+            }
+            const existingKeys = new Set(state.savedWorkshops.map(b => b.bookmarkKey));
+            let added = 0;
+            list.forEach(item => {
+              if (!item || !item.toolName) return;
+              const key = item.bookmarkKey || `${item.link || 'imported'}::${item.toolName}`;
+              if (!existingKeys.has(key)) {
+                existingKeys.add(key);
+                state.savedWorkshops.push({
+                  ...item,
+                  bookmarkKey: key,
+                  savedEdition: item.savedEdition || '导入存档'
+                });
+                added++;
+              }
+            });
+            if (parsed && parsed.checkedSteps && typeof parsed.checkedSteps === 'object') {
+              state.checkedSteps = { ...state.checkedSteps, ...parsed.checkedSteps };
+            }
+            persistState();
+            renderWorkshop();
+            showToast(added > 0 ? `成功合并导入 ${added} 个小白工坊存档` : '存档中的工具均已存在，已同步打卡进度');
+          } catch (err) {
+            showToast('小白工坊存档 JSON 解析失败');
           }
         };
         reader.readAsText(file);
