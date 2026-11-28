@@ -2,18 +2,18 @@
   "editionDate": "2026-11-28",
   "editorialTakeaways": [
     {
-      "label": "主线一：机器人进入基座共享与生态共建阶段",
-      "text": "众擎开放人形机器人「大小脑」并配套10亿级生态计划，同一天国内团队开源首个带跨任务空间记忆的机器人原生基模且可端侧运行。两条新闻指向同一拐点：具身智能的竞争焦点从硬件本体，转向可复用、可累积的软件基座与真机数据资产，小团队首次有机会站在别人的真机成果上起跑。"
+      "label": "具身智能进入记忆复用与生态开放期",
+      "text": "今日两条机器人新闻形成呼应：首个带跨任务空间记忆的原生基模开源并可在端侧运行，众擎开放人形机器人“大小脑”并推出10亿元生态计划。信号很明确——具身智能的竞争正从单机演示转向可复用记忆、真机验证与开发者生态，端侧部署和场景集成将成为下一阶段分水岭。"
     },
     {
-      "label": "主线二：数据、Token 与算力被重新定价",
-      "text": "编码训练数据市场被曝出「独占溢价、共享折扣」的定价逻辑，商汤大装置拿到全国首个 Token 工厂「全栈服务型·领先级」评级，英伟达则暂停向东南亚四国发运服务器，DeepSeek 双端上线聊天账单。AI 的三大生产要素，即数据、推理产能与芯片通道，正在从模糊补贴走向明码标价与合规约束，成本模型需要重算。"
+      "label": "AI竞争转向数据与算力供应链",
+      "text": "编码数据市场出现独占溢价与非独占折扣的分层定价，英伟达暂停对东南亚服务器出货，商汤Token工厂获最高评级。三件事共同说明：高质量数据授权、算力合规与Token化服务正在成为新的护城河，单纯堆模型参数已不足以解释竞争格局。"
     }
   ],
   "items": [
     {
       "id": "n1",
-      "title": "众擎开放人形机器人「大小脑」，10亿级产业生态支持计划同步启动",
+      "title": "首个带跨任务空间记忆的原生基模开源，机器人端侧可跑",
       "source": "机器之心/量子位",
       "category": "具身智能",
       "readMinutes": 3,
@@ -21,87 +21,65 @@
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-27",
       "quickPick": true,
-      "url": "https://www.qbitai.com/2026/11/513352.html",
-      "summary": "众擎宣布向外部开发者开放人形机器人的「大脑」（决策规划）与「小脑」（运动控制）软件栈，使一支团队在真机上验证过的成果可以直接成为下一支团队的开发起点；同时启动总额10亿元级别的产业级生态支持计划，覆盖开发板、真机调试时长、场景数据与联合孵化，试图把一次性的真机踩坑经验沉淀为可复用的公共资产。",
-      "englishSummary": "Humanoid-robot maker Zhongqing has opened its 'big brain / little brain' software stack to external developers so that results validated on real hardware can seed the next team's work. It simultaneously launched a billion-yuan-scale industry ecosystem program covering dev kits, real-robot debugging hours, scenario data and joint incubation. The bet is that one-off real-machine experience can be converted into reusable public infrastructure.",
-      "problemSolved": "解决人形机器人开发中真机成本高、踩坑经验无法复用、每个团队都要从零重做运动控制与任务规划的痛点。",
-      "beginnerAnalogy": "像前人已经把「学骑自行车」的平衡技巧写成了说明书还借你车练，你不用再从摔跤开始学。",
+      "url": "https://www.qbitai.com/2026/11/513227.html",
+      "summary": "11月27日，机器之心/量子位报道，首个带跨任务空间记忆的原生机器人基模开源，可在端侧运行。该模型把地图记忆与任务记忆解耦，支持跨任务复用空间信息，并能在运行中随时修正地图；团队在真机上验证了导航、操作等任务。开源意味着开发者可直接在本地机器人上二次开发，降低具身智能应用门槛。",
+      "englishSummary": "A new open-source native foundation model for robots, featuring cross-task spatial memory, was released and can run on-device. It decouples map and task memory so spatial information can be reused across tasks and corrected on the fly. The release lowers the barrier for developers to build embodied AI applications on local robots.",
+      "problemSolved": "机器人跨任务重复建图、空间记忆无法复用、端侧部署门槛高。",
+      "beginnerAnalogy": "像给机器人装了一个“可随身携带且能随时修改的活地图”，换任务不用重新认路。",
       "beginnerSteps": [
-        "先逛众擎开放社区与生态计划页面，确认可申请的开发板、仿真环境与真机时长额度。",
-        "在仿真里跑通官方「小脑」运动控制示例，再接入「大脑」做一条最简单的抓取指令。",
-        "把调试日志整理成一份可复现的说明文档回传社区，这既是经验沉淀，也是最容易入选生态支持的敲门砖。"
+        "在开源仓库拉取模型与示例代码，准备一台带RGB-D相机的机器人或仿真环境",
+        "按文档录制一段室内路径，让模型建立初始空间记忆",
+        "切换到新任务，观察模型复用地图并在遮挡变化时自动修正"
       ],
-      "industryImpact": "人形机器人将重演「安卓式」生态分工：本体厂商收敛为硬件与基座供应方，算法与场景公司在上层做垂直应用，真机数据成为新的护城河。"
+      "industryImpact": "推动具身智能从单任务演示走向可复用记忆的端侧部署，利好服务机器人、仓储机器人、仿真平台与边缘芯片。"
     },
     {
       "id": "n2",
-      "title": "首个带跨任务空间记忆的原生机器人基模开源，机器人端侧就能跑",
+      "title": "众擎开放人形机器人“大小脑”，10亿产业级生态计划来了",
       "source": "机器之心/量子位",
-      "category": "机器人基座模型",
-      "readMinutes": 3,
+      "category": "人形机器人",
+      "readMinutes": 2,
       "signal": "opportunity",
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-27",
-      "quickPick": true,
-      "url": "https://www.qbitai.com/2026/11/513227.html",
-      "summary": "国内团队开源首个具备跨任务空间记忆能力的机器人原生基础模型：地图可以随时被增量修正，记忆能在不同任务之间复用，不必每换一个任务就重置环境、重建地图；同时模型可在机器人端侧算力上直接推理运行，大幅降低对云端大算力的依赖，为长程家务、巡检与仓储搬运等连续任务提供可复用的空间认知底座。",
-      "englishSummary": "A domestic team has open-sourced the first native robot foundation model with cross-task spatial memory. Maps can be incrementally corrected on the fly and memory persists across tasks instead of being reset each time, while inference runs directly on robot-side compute without cloud dependence. This targets long-horizon tasks such as household chores, inspection and warehouse transport.",
-      "problemSolved": "解决机器人换任务就失忆、换场景就要重建地图、必须依赖云端大算力才能推理的核心痛点。",
-      "beginnerAnalogy": "像你换了一个房间干活，但脑子里的户型图和上一次摆东西的经验都还在，不用重新认路。",
+      "quickPick": false,
+      "url": "https://www.qbitai.com/2026/11/513352.html",
+      "summary": "11月27日，众擎机器人宣布开放人形机器人“大小脑”开发能力，并推出10亿元产业级生态支持计划。“大小脑”分别对应高层任务规划与底层运动控制，开发者可在统一平台上调用感知、决策与执行模块。该计划面向高校、创业团队和行业集成商，提供真机验证、资金与场景对接，试图把单团队成果沉淀为可复用的开发者起点。",
+      "englishSummary": "Zhongqing Robotics opened its humanoid robot “large brain/small brain” development stack and launched a 1-billion-yuan ecosystem support plan. The platform separates high-level planning from low-level motion control and offers real-machine validation, funding and scenario access to developers. It aims to turn one team’s results into reusable building blocks for the broader ecosystem.",
+      "problemSolved": "人形机器人开发重复造轮子、真机验证成本高、场景与资金资源分散。",
+      "beginnerAnalogy": "像安卓开放系统给手机开发者：不用从造手机开始，直接调用“大脑想任务、小脑管动作”的模块做应用。",
       "beginnerSteps": [
-        "从开源仓库拉下模型权重与配套的仿真 demo，先在你的笔记本上跑通一次端侧推理。",
-        "用手机或小车录一段带视觉的室内路线数据，让模型自己建一张会记忆的地图。",
-        "设计一个跨任务测试：先让它找到桌上的杯子，再让它去阳台取东西，观察记忆有没有真正被复用。"
+        "关注众擎开发者平台开放申请入口，提交团队或项目简介",
+        "下载SDK与仿真示例，先跑通一个抓取或导航demo",
+        "申请真机验证名额，把demo迁移到实体机器人并记录失败案例"
       ],
-      "industryImpact": "端侧空间记忆让机器人从单点任务的「遥控玩具」走向长程自主作业，直接推动服务机器人从演示Demo进入可交付的工程阶段。"
+      "industryImpact": "人形机器人产业从整机竞赛转向开发者生态竞赛，利好核心零部件、灵巧手、运动控制、场景集成商。"
     },
     {
       "id": "n3",
-      "title": "DeepSeek App 双端突然上线「聊天账单」，用户猜测收费将至",
-      "source": "机器之心/量子位",
-      "category": "商业模式",
-      "readMinutes": 2,
-      "signal": "watch",
-      "signalLabel": "🟡 重点关注",
-      "publishedAt": "2026-11-27",
-      "quickPick": false,
-      "url": "https://www.qbitai.com/2026/11/513305.html",
-      "summary": "DeepSeek 在网页端与 App 端同时上线聊天用量账单展示，用户可查看历史对话的调用与消耗情况，但官方尚未公布具体计费规则与生效时间。社区普遍解读为「免费时代进入倒计时」的信号：一旦按量计费落地，依赖免费或低价 API 的套壳应用、个人自动化脚本与批量内容生产工作流，将首当其冲需要重算单位成本。",
-      "englishSummary": "DeepSeek has rolled out a usage-bill view on both its web and mobile clients, letting users see token consumption across past conversations, though no pricing rules or effective date have been announced. The community reads it as the countdown to paid usage. If metered billing lands, wrapper apps, personal automation scripts and bulk content pipelines built on free or cheap APIs will face immediate unit-cost recalculations.",
-      "problemSolved": "让用户第一次能看到自己在模型上的真实消耗，为平价或付费的透明度打底，也提示开发者提前做成本审计。",
-      "beginnerAnalogy": "像一直免费续杯的咖啡店突然在小票上打出了杯数，虽然还没收钱，但你已经知道账单在路上了。",
-      "beginnerSteps": [
-        "打开 App 账单页，统计你最近一个月真实用了多少次、每次多长的对话，估出你的「个人用量画像」。",
-        "把你的自动化脚本改成可切换模型提供方，用环境变量或模型路由把主备通道一次配置好。",
-        "给自己设一条成本红线，比如每月固定额度，并在脚本里加用量上限与失败重试，避免夜里跑飞。"
-      ],
-      "industryImpact": "大模型免费补贴退坡后，应用层竞争将从「谁的提示词更好」转向「谁的推理成本更低」，模型路由与成本优化工具会成为标配。"
-    },
-    {
-      "id": "n4",
-      "title": "AI 训练数据市场爆发：前沿实验室如何为代码数据付费",
+      "title": "编码数据市场爆发：前沿实验室如何购买训练数据",
       "source": "AI News / The Batch",
-      "category": "数据要素市场",
+      "category": "AI训练数据",
       "readMinutes": 3,
       "signal": "opportunity",
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-28",
       "quickPick": true,
       "url": "https://latent.space/p/ainews-inside-the-exploding-coding-data-market/",
-      "summary": "深度报道揭示正在成型的编码训练数据交易市场：前沿实验室对可独占的数据支付显著溢价，对允许其他实验室同时购买的数据则要求相应折扣；一笔小额试单常常演化为长期大规模采购。文章拆解了数据供应商、专业标注团队与实验室之间的定价标准、独占条款与交付验收流程，指出高质量代码轨迹正从开发副产品变成可定价的核心生产资料。",
-      "englishSummary": "A deep dive into the emerging market for coding training data: frontier labs pay a premium for exclusive data and demand a discount on data other labs can also buy, with small pilot orders often growing into large long-term purchases. The piece maps pricing, exclusivity clauses and delivery workflows between suppliers, annotation teams and labs. High-quality code trajectories are becoming priced production assets rather than by-products.",
-      "problemSolved": "解释了为什么「好数据」比模型更稀缺，以及数据供应商如何为独家数据定价、如何与实验室签订交付合同。",
-      "beginnerAnalogy": "像菜市场里同一条鱼，只卖给你一个人是高价，愿意和别人拼单就有折扣，代码数据如今就是这条鱼。",
+      "summary": "11月28日，AI News/The Batch梳理“编码数据市场”的爆发：前沿实验室愿意为独占的高质量代码与推理轨迹支付溢价，非独占数据则打折出售。文章披露实验室如何评估数据质量、做小规模试点再扩大采购，以及数据供应商如何围绕代码、测试和真实工程任务构建产品。训练数据正从“爬取即可”变成有分层定价和独家授权的市场。",
+      "englishSummary": "AI News/The Batch examines the exploding coding-data market, where frontier labs pay a premium for exclusive high-quality code and reasoning traces while discounted data can be shared. The piece details quality evaluation, pilot-to-scale purchasing, and how vendors package code, tests and real engineering tasks. Training data is becoming a tiered, licensed market rather than a crawl-first commodity.",
+      "problemSolved": "高质量代码训练数据稀缺、定价与授权不透明、实验室采购决策困难。",
+      "beginnerAnalogy": "像顶级餐厅买食材：独家供应的好食材更贵，大家都能买到的则打折；数据供应商就是“食材买手”。",
       "beginnerSteps": [
-        "盘点你手里已被允许使用、质量高的代码、测试或日志样本，先小批量整理成带标签的数据集。",
-        "按「指令、代码、测试结果」三元组规范字段，确保别人拿到就能直接训练，这是买方最先检查的地方。",
-        "先接一个极小试单，交付时附上样本统计与去重、脱敏说明，用可验证的交付质量换取复购。"
+        "盘点自己可合法授权的代码/测试/工程日志，按领域和难度打标签",
+        "先做100-500条小样本包，附质量说明与评测结果，联系数据平台或实验室试点",
+        "根据反馈迭代数据格式，明确独占/非独占授权与定价"
       ],
-      "industryImpact": "数据供应商将从「人力外包」升级为「资产运营方」，同时催生数据授权审计、合规溯源与合成数据增广的新链条。"
+      "industryImpact": "催生代码数据标注、合成数据、数据合规与交易平台，改变大模型预训练与后训练的成本结构。"
     },
     {
-      "id": "n5",
-      "title": "英伟达暂停向东南亚四国发运服务器，芯片管制进一步收紧",
+      "id": "n4",
+      "title": "英伟达暂停对东南亚服务器出货，芯片管制升级",
       "source": "AI News / The Batch",
       "category": "算力供应链",
       "readMinutes": 2,
@@ -110,238 +88,261 @@
       "publishedAt": "2026-11-26",
       "quickPick": false,
       "url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
-      "summary": "据 TechCrunch 报道，英伟达已通知制造伙伴暂停向马来西亚、新加坡、泰国与印度尼西亚发运服务器，以配合美国进一步收紧、防止 AI 芯片流入中国的管制要求。转口通道被封堵意味着区域算力租赁价格与交付周期将出现明显波动，在东南亚部署训练集群、或依赖当地云资源的团队需要提前重新评估供应稳定性和合规风险。",
-      "englishSummary": "Nvidia has reportedly told manufacturing partners to pause server shipments to Malaysia, Singapore, Thailand and Indonesia as Washington tightens its effort to keep AI chips out of China. Closing the transshipment route implies swings in regional compute rental prices and delivery lead times. Teams deploying training clusters in Southeast Asia, or relying on local clouds, should reassess supply stability and compliance exposure now.",
-      "problemSolved": "揭示了转口贸易通道被切断后，区域性算力供给中断对训练排期与成本的直接冲击，提醒团队提前做备份方案。",
-      "beginnerAnalogy": "像原本绕路能送到的快递，现在中转站突然被关闭，你的货要么等更久，要么换更贵的空运。",
+      "summary": "11月26日，TechCrunch报道英伟达已通知制造伙伴暂停向马来西亚、新加坡、泰国和印度尼西亚交付服务器，原因是美国进一步收紧AI芯片流向中国的管制。该暂停覆盖部分服务器整机与GPU系统，可能影响东南亚数据中心建设与转口贸易。分析认为，区域AI算力部署将出现延迟，云厂商需重新规划节点，黑市与转口风险上升。",
+      "englishSummary": "Nvidia has told manufacturing partners to pause server shipments to Malaysia, Singapore, Thailand and Indonesia as the U.S. tightens rules to keep AI chips out of China. The pause affects some server systems and GPU deployments, potentially delaying Southeast Asian data-center buildouts and re-export trade. Cloud providers may need to replan capacity while diversion risks rise.",
+      "problemSolved": "表面解决出口管制合规，实际暴露全球AI算力供应链的区域断点。",
+      "beginnerAnalogy": "像高速公路突然设卡查货：不是没货，而是货要绕路、等检查，沿途加油站生意受影响。",
       "beginnerSteps": [
-        "查清你所用云服务或代理的服务器实际落地机房在哪，标出哪些资源位于受影响的四国。",
-        "为关键训练任务准备第二个区域或第二种卡型的备用方案，并提前申请配额，别等断供再排队。",
-        "在项目预算里增加一列「算力涨价缓冲」，比如预留20%的弹性额度，避免中途被迫砍实验。"
+        "检查自己的云资源或服务器采购是否依赖东南亚节点，列出替代区域",
+        "与供应商确认交付时间与合规证明，预留2-4周缓冲",
+        "把非敏感推理任务迁到多区域架构，避免单点断供"
       ],
-      "industryImpact": "算力将更明确地按地缘政治分区定价，区域云厂商与国产算力链受益，同时推动模型小型化与端侧推理加速落地。"
+      "industryImpact": "加剧AI算力区域化，利好本土算力、液冷数据中心、边缘推理与合规服务，短期利空东南亚IDC。"
     },
     {
-      "id": "n6",
-      "title": "推理基础设施日报：vLLM、SGLang、llama.cpp、Ollama 等六项目横向对比",
+      "id": "n5",
+      "title": "AI CLI工具社区日报：Claude Code、Codex、Gemini CLI等七工具混战",
       "source": "RadarAI",
-      "category": "推理基础设施",
-      "readMinutes": 3,
+      "category": "AI开发工具",
+      "readMinutes": 2,
       "signal": "watch",
       "signalLabel": "🟡 重点关注",
       "publishedAt": "2026-11-28",
       "quickPick": false,
-      "url": "https://github.com/duanyytop/agents-radar/issues/4520",
-      "summary": "RadarAI 汇总 vLLM、SGLang、llama.cpp、Ollama、LiteLLM 与 Unsloth 六个主流推理与微调项目的当日进展，并给出跨项目横向对比，涵盖吞吐优化、量化支持、多卡并行与本地部署体验。对自建推理服务的团队，这份日报相当于一张实时更新的选型地图，可据此判断哪个框架正在解决你当前的延迟、显存或并发瓶颈。",
-      "englishSummary": "RadarAI's daily digest tracks the six leading open inference and fine-tuning projects, covering throughput tuning, quantization support, multi-GPU parallelism and local deployment experience in a cross-project comparison. For teams running their own inference, it works as a continuously updated selection map for diagnosing latency, VRAM and concurrency bottlenecks.",
-      "problemSolved": "解决推理框架更新太快、选型靠口口相传、踩坑成本高的问题，把六项目的当日变化压缩成一页对比。",
-      "beginnerAnalogy": "像买车前有人帮你把六款车的油耗、后备箱和马力和当天的新配件都列在一张表上再选。",
+      "url": "https://github.com/duanyytop/agents-radar/issues/4518",
+      "summary": "11月28日，RadarAI发布AI CLI工具社区日报，覆盖Claude Code、OpenAI Codex、Gemini CLI、GitHub Copilot CLI、OpenCode、Pi、Qwen Code等七款工具。日报汇总各项目的Issue、PR与版本动态，显示CLI正成为编码Agent的主要入口：多模型切换、本地文件操作、终端内自动修复成为标配。社区讨论集中在权限控制、上下文窗口和跨工具兼容性。",
+      "englishSummary": "RadarAI’s AI CLI Tools Digest covers seven tools including Claude Code, OpenAI Codex, Gemini CLI, GitHub Copilot CLI, OpenCode, Pi and Qwen Code. The digest tracks issues, PRs and releases, showing CLI as a key entry point for coding agents with multi-model switching, local file operations and in-terminal fixes. Community debate focuses on permissions, context windows and cross-tool compatibility.",
+      "problemSolved": "开发者面对众多AI CLI工具难以选型、跟踪更新和比较能力。",
+      "beginnerAnalogy": "像手机应用商店的“本周工具榜”，把七个热门AI终端助手的变化一次列清。",
       "beginnerSteps": [
-        "先明确你的约束：单卡还是多卡、显存多大、要吞吐还是要低延迟，写在一张纸上。",
-        "对照日报里的横向对比，只保留满足硬性约束的2个框架，别一次性试六个。",
-        "用同一个模型和同一批请求分别压测这两个框架，记录每秒 Token 数与首字延迟，用数据下决定。"
+        "从日报中选一个与现有模型订阅匹配的CLI工具，如Gemini CLI或Qwen Code",
+        "按官方文档完成安装与登录，在测试仓库中让它生成一个函数",
+        "对比生成结果与权限提示，记录最适合自己工作流的工具"
       ],
-      "industryImpact": "推理层正在形成「vLLM 打云端吞吐、llama.cpp 与 Ollama 打端侧体验」的分层格局，中间件与模型路由层价值随之抬升。"
+      "industryImpact": "推动编码Agent从IDE插件转向终端原生，利好CLI工具链、权限审计、多模型路由。"
     },
     {
-      "id": "n7",
-      "title": "GitHub 趋势榜首：NousResearch 开源「会成长的」Agent 框架 hermes-agent",
+      "id": "n6",
+      "title": "Hermes-Agent登顶GitHub趋势：会“成长”的Agent",
       "source": "GitHub Trending",
-      "category": "Agent 框架",
-      "readMinutes": 2,
+      "category": "Agent框架",
+      "readMinutes": 3,
       "signal": "opportunity",
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-28",
       "quickPick": true,
       "url": "https://github.com/NousResearch/hermes-agent",
-      "summary": "NousResearch 的 hermes-agent 登上 GitHub 趋势榜首，项目定位是「与你一起成长的 Agent」：把工具调用、记忆与技能积累做成可沉淀的结构，让代理在反复使用中逐步变强，而不是每次会话都从零开始。对个人开发者而言，这是一副成本极低、可以直接改装成私人长期助手的现成骨架，也让「个人 Agent 资产化」第一次有了可落地的载体。",
-      "englishSummary": "NousResearch's hermes-agent tops GitHub Trending with a pitch of an agent that grows with you: tool calling, memory and skills are stored in structures that accumulate across sessions instead of resetting each time. For solo developers it is a cheap, hackable skeleton for a long-lived personal assistant, giving 'personal agent as an asset' a concrete carrier.",
-      "problemSolved": "解决绝大多数 Agent 每次对话都失忆、重复配置工具、无法把经验沉淀成可复用技能的问题。",
-      "beginnerAnalogy": "像请了一个会记工作手册的助理，第一次教过的流程，第二个月他还会自己翻出来照着做。",
+      "summary": "11月28日，NousResearch的hermes-agent登上GitHub Trending，星标约26.7万。项目定位为“与你一起成长的Agent”，强调可持久化记忆、工具调用与自我改进循环，让Agent在长期使用中积累偏好和任务经验。仓库提供统一的Agent循环、工具接口与示例，适合开发者构建个人助理、研究助手和自动化工作流。高星标反映社区对可进化Agent框架的强烈需求。",
+      "englishSummary": "NousResearch’s hermes-agent trended on GitHub with about 267k stars, positioned as “the agent that grows with you.” It emphasizes persistent memory, tool use and self-improvement loops so the agent accumulates preferences and task experience over time. The repo offers a unified agent loop, tool interfaces and examples for personal assistants and automation.",
+      "problemSolved": "传统Agent每次对话从零开始、无法积累长期经验、工具集成碎片化。",
+      "beginnerAnalogy": "像招了一个会写工作笔记的实习生：每次做完事都记下你的偏好，下次不用重新交代。",
       "beginnerSteps": [
-        "克隆仓库并装好依赖，先用最简配置跑通一次带工具调用的对话，确认环境没问题。",
-        "把你每天重复的一件小事（比如整理下载文件夹）写成一条技能，交给它执行并观察记录。",
-        "一周后回看它的记忆文件，删掉无效条目、固化有效流程，这就是你的第一份个人 Agent 资产。"
+        "克隆仓库并安装依赖，配置一个LLM API Key",
+        "运行示例Agent，给它一个重复性任务（如整理日报）并允许它记录偏好",
+        "第二次运行同一任务，检查它是否调用历史记忆减少你的指令"
       ],
-      "industryImpact": "Agent 竞争从「单次任务能力」转向「记忆与技能的可累积性」，个人与小团队的私有 Agent 资产将成为新的效率差距来源。"
+      "industryImpact": "推动Agent从一次性工具走向长期个人化/企业化，利好记忆存储、向量数据库、工具生态与Agent评测。"
+    },
+    {
+      "id": "n7",
+      "title": "Dify持续霸榜：低代码搭建Agentic工作流",
+      "source": "GitHub Trending",
+      "category": "低代码AI",
+      "readMinutes": 2,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
+      "publishedAt": "2026-11-28",
+      "quickPick": false,
+      "url": "https://github.com/langgenius/dify",
+      "summary": "11月28日，langgenius/dify继续位列GitHub Trending，星标约16.2万。Dify提供可视化工作流编排、RAG管道、模型与工具接入，支持云服务、VPC和自托管部署。用户可拖拽节点搭建Agentic应用，从原型直接走向生产，而不必重搭技术栈。其热度说明“低代码+可自托管”的AI应用平台正成为企业落地Agent的主流选择。",
+      "englishSummary": "langgenius/dify remains on GitHub Trending with about 162k stars, offering visual workflow orchestration, RAG pipelines and model/tool integrations across cloud, VPC and self-hosted deployments. Users can drag-and-drop agentic apps from prototype to production without rebuilding the stack. Its popularity signals demand for low-code, self-hostable AI app platforms.",
+      "problemSolved": "Agent应用开发门槛高、原型到生产需要重复搭建、模型与工具集成复杂。",
+      "beginnerAnalogy": "像搭积木一样拼出AI员工：把“查资料、写答案、发邮件”等积木拖到一起就能跑。",
+      "beginnerSteps": [
+        "用Docker Compose一键启动Dify社区版，打开本地控制台",
+        "新建一个工作流，接入一个LLM和知识库，拖入“开始-检索-生成-结束”节点",
+        "在调试面板输入问题，发布为API或网页分享给同事"
+      ],
+      "industryImpact": "加速企业AI应用平民化，利好低代码平台、RAG中间件、私有化部署与行业解决方案商。"
     },
     {
       "id": "n8",
-      "title": "论文复盘：把大模型当作「上下文工程师」到底靠不靠谱",
+      "title": "重新审视LLM作为“上下文工程师”",
       "source": "Hugging Face",
       "category": "上下文工程",
-      "readMinutes": 2,
-      "signal": "watch",
-      "signalLabel": "🟡 重点关注",
+      "readMinutes": 3,
+      "signal": "opportunity",
+      "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-22",
       "quickPick": false,
       "url": "https://huggingface.co/papers/2611.30494",
-      "summary": "这篇研究重新审视「让大模型自己写上下文」这类上下文工程方法：模型从离线试错中提炼可迁移的指令与经验，再注入后续任务，形式类似人类从经验中学习。作者系统比较了自动提示优化、经验库与元学习三条路线的收益与失效边界，指出这类方法在任务分布发生漂移时容易过拟合历史经验，必须配套独立的评测集与回滚机制才敢上生产。",
-      "englishSummary": "This study revisits LLM-as-context-engineer approaches where the model mines transferable instructions and experience from offline trials and injects them into later tasks. It compares auto prompt optimization, experience banks and meta-learning routes, showing gains but also a failure mode: when task distributions drift, the model overfits historical experience. Independent eval sets and rollback mechanisms are required before production use.",
-      "problemSolved": "为「自动优化提示词」这类流行做法划出能力边界，避免团队把偶然跑通的经验直接当成通用能力上线。",
-      "beginnerAnalogy": "像一个学生把上次考试的错题本背得很熟，题型一换反而不会做了，所以得留一套没见过的卷子定期摸底。",
+      "summary": "11月22日，Hugging Face论文《Revisiting LLMs as Context Engineers》讨论让LLM自己成为上下文工程师：不依赖密集训练，而是从离线试验中提炼可复用指令、元数据和经验，作为后续任务的上下文。文章梳理了自动上下文工程的方法谱系，并指出其与人类经验学习的相似性和差距。核心结论是：上下文构造正成为与模型能力同等重要的性能杠杆。",
+      "englishSummary": "A Hugging Face paper, “Revisiting LLMs as Context Engineers,” explores casting LLMs as context engineers that distill reusable instructions, metadata and experience from offline trials without intensive training. It surveys automated LLM context engineering and compares it with human experiential learning. The takeaway: context construction is becoming a performance lever as important as model capability.",
+      "problemSolved": "提示工程依赖手工试错、经验难以沉淀、跨任务迁移差。",
+      "beginnerAnalogy": "像让学霸自己整理错题本：不是重新补课，而是把做过的题总结成下次可翻看的笔记。",
       "beginnerSteps": [
-        "把你手上的提示词分成「训练用」和「盲测用」两份，盲测那份在调优期间绝对不要看。",
-        "让模型自己总结经验并改写提示词，只允许改训练用那一份，改完立刻在盲测集上打分。",
-        "同时保留旧版提示词，一旦盲测分数下降就一键回滚，别让优化变成退化。"
+        "选一个重复任务，让LLM先执行5次并记录成功/失败原因",
+        "要求它把原因提炼成3-5条可复用“上下文卡片”（规则、示例、禁忌）",
+        "在新任务中只贴入这些卡片，对比无卡片时的准确率与耗时"
       ],
-      "industryImpact": "上下文工程将从「调参玄学」走向工程化，提示词版本管理、自动评测与回滚将成为 AI 应用团队的标准基建。"
+      "industryImpact": "推动上下文工程工具化，利好提示管理、记忆系统、Agent中间件与评测服务。"
     },
     {
       "id": "n9",
-      "title": "实证研究泼冷水：让模型先生成图再作答，反而更不准",
+      "title": "DART：为难题挖掘多样替代推理轨迹",
       "source": "arXiv (cs.AI/cs.CL/cs.LG)",
-      "category": "多模态推理",
-      "readMinutes": 2,
+      "category": "推理增强",
+      "readMinutes": 3,
       "signal": "watch",
       "signalLabel": "🟡 重点关注",
       "publishedAt": "2026-11-25",
       "quickPick": false,
-      "url": "https://arxiv.org/abs/2611.34935v1",
-      "summary": "研究直接检验「多模态模型用图像思考」的假设：模型先描述自己需要的辅助图，再结合原图与生成图作答。在覆盖13组视觉语言模型与生成器组合后，平均准确率下降3.7个百分点，10个任务里有9个变差，BAGEL 与 Janus-Pro-7B 两个统一模型各在8个任务上出现退化。结论是当前的图像生成更多带来干扰与幻觉，尚未成为有效的中间推理步骤。",
-      "englishSummary": "The authors test whether multimodal models can 'think in images': a model describes a helper image it needs, then answers using the original and generated images together. Across 13 vision-language-model and generator pairs, mean accuracy drops 3.7 points, with degradation on 9 of 10 tasks; unified models BAGEL and Janus-Pro-7B each lose accuracy on 8 tasks. Generated images currently add noise rather than a useful reasoning step.",
-      "problemSolved": "戳破了「让模型画一张图再答题会更强」的直觉，帮团队省下为这类花哨流程付出的算力与延迟成本。",
-      "beginnerAnalogy": "像解题时先在草稿纸上画一张自己想象的示意图，结果图画错了，反而把原本能答对的题带偏了。",
+      "url": "https://arxiv.org/abs/2611.34928v1",
+      "summary": "11月25日，arXiv论文提出DART（Diverse Alternative Reasoning Traces），用于困难数学题的推理轨迹挖掘。方法从被拒绝的轨迹出发，将其分解为推理步骤，按位置加权不确定性排序，再生成刻意不同的替代轨迹。这样可在独立蒙特卡洛采样难以找到正确轨迹时，提供更多样化的训练信号。论文显示该方法能提升难题后训练的数据效率，为数学推理模型提供新思路。",
+      "englishSummary": "An arXiv paper introduces DART for mining reasoning traces on hard math problems. Starting from rejected traces, it decomposes them into steps, ranks by position-weighted uncertainty and generates deliberately distinct alternatives. This yields diverse training signals when independent Monte Carlo sampling struggles, improving data efficiency for math-reasoning post-training.",
+      "problemSolved": "困难数学题正确轨迹稀疏、独立采样成本高、后训练数据多样性不足。",
+      "beginnerAnalogy": "像解不出题时，不只重算一遍，而是把错题拆成步骤，找出最可疑的一步，再故意换几种思路重走。",
       "beginnerSteps": [
-        "在你现有的多模态任务里挑20条样本，分别跑「直接作答」和「先生成辅助图再作答」两条路径。",
-        "只比较准确率与耗时两个数字，如果生成路径更慢且没更准，就果断关掉这个功能。",
-        "把结论写进团队文档，并把「生成辅助图」设为可开关选项，而不是默认开启的流程。"
+        "收集一批模型做错的数学题及其错误解答",
+        "把错误解答拆成步骤，标出最不确定的步骤并生成2-3种替代思路",
+        "用正确与替代轨迹混合做微调或提示，比较难题通过率"
       ],
-      "industryImpact": "多模态产品会把资源从「炫技式的图像中间步骤」转向检索增强与工具化视觉理解，评测驱动的功能取舍将越来越严格。"
+      "industryImpact": "利好AI4Math、推理模型后训练、教育智能体与自动评测数据生产。"
     },
     {
       "id": "n10",
-      "title": "商汤大装置获全国首批首家「Token 工厂」智算能力最高评级",
+      "title": "商汤大装置获“Token工厂”最高评级",
       "source": "机器之心/量子位",
-      "category": "智算服务",
+      "category": "AI基础设施",
       "readMinutes": 2,
       "signal": "watch",
       "signalLabel": "🟡 重点关注",
       "publishedAt": "2026-11-27",
       "quickPick": false,
       "url": "https://www.qbitai.com/2026/11/513346.html",
-      "summary": "商汤大装置通过中国信通院 Token 工厂智算能力评估，获得「全栈服务型·领先级」认证，成为全国首批首家拿到该评级的平台。评估以单位 Token 产能、服务稳定性与全栈交付能力为标尺，意味着算力供给正从「卖卡时」转向「卖 Token」的标准化服务形态，企业采购推理能力第一次有了可对标的第三方依据。",
-      "englishSummary": "SenseTime's large-scale computing platform passed the China Academy of Information and Communications Technology's Token Factory evaluation, earning the top 'full-stack service, leading tier' certification as the first in the country. The benchmark measures token throughput per unit, service stability and full-stack delivery, signaling a shift from selling GPU-hours to selling standardized tokens — and giving buyers third-party comparability for the first time.",
-      "problemSolved": "解决企业采购推理算力时口径混乱、无法横向比较不同厂商产能与稳定性的痛点。",
-      "beginnerAnalogy": "像买电不再是模糊的「一度电大概多少钱」，而是有了统一的电表和国家认证，谁家的电稳不稳一查就知道。",
+      "summary": "11月27日，商汤大装置Token工厂获中国信通院“Token工厂智算能力评估”的“全栈服务型·领先级”评级，为全国首批首家。该评估从算力调度、模型服务、Token生产效率与稳定性等维度考察AI基础设施。商汤称其可提供从训练到推理的全栈Token生产能力。评级将“Token工厂”概念标准化，反映算力服务正从卖GPU转向卖可计量的模型调用能力。",
+      "englishSummary": "SenseTime’s large-device Token Factory received the top “full-stack service · leading” rating in CAICT’s Token Factory computing-power assessment, the first nationwide. The evaluation covers scheduling, model serving, token-production efficiency and stability. The rating standardizes the “token factory” concept, signaling a shift from selling GPUs to selling metered model-call capacity.",
+      "problemSolved": "算力服务缺乏统一评估标准、Token生产效率与稳定性难比较。",
+      "beginnerAnalogy": "像给“AI发电厂”发等级证书：不看锅炉多大，而看每度电是否稳定、便宜、可计量。",
       "beginnerSteps": [
-        "去查这份评估的具体指标口径，特别是单位 Token 产能与稳定性如何测量，作为你选服务商的对照表。",
-        "把自家业务换算成「每月需要多少 Token」，而不是「需要多少张卡」，采购沟通会顺畅很多。",
-        "向供应商索要可验证的稳定性与吞吐数据，并要求写入服务协议，别只看宣传页。"
+        "关注信通院Token工厂评估指标，列出算力调度、模型服务、稳定性三项",
+        "对比自己使用的云厂商是否公布Token生产效率与SLA",
+        "在小规模推理业务中记录每万Token成本与延迟，作为选型依据"
       ],
-      "industryImpact": "推理产能标准化将加速 MaaS 市场分层，具备全栈交付与稳定产能的厂商获得溢价，中间小规模转售商空间被压缩。"
+      "industryImpact": "推动AI算力服务标准化与Token计费模式，利好智算中心、模型服务商、推理优化与算力调度软件。"
     }
   ],
   "foresightTracks": [
     {
-      "title": "01. 具身智能开源基座与机器人「大小脑」生态",
+      "title": "01. 具身智能基础模型与开发者生态",
       "horizon": "6–18 个月",
-      "heatScore": 94,
+      "heatScore": 95,
       "relatedNews": [
-        "众擎开放大小脑并启动10亿级生态计划",
-        "首个跨任务空间记忆机器人基模开源"
+        "首个带跨任务空间记忆的原生基模开源",
+        "众擎开放大小脑与10亿生态计划"
       ],
-      "coreLogic": "机器人行业正从「每家具身公司自建全套软件栈」转向「共享基座 + 垂直场景应用」的分层结构。开源跨任务空间记忆基模让端侧自主成为可能，生态计划则把真机调试经验与场景数据变成公共资产，二者的组合会显著压低单个团队的研发门槛与试错成本，复现安卓式的生态分工。",
-      "beneficiaries": "人形与轮式本体厂商、灵巧手与关节模组、真机数据采集与仿真平台、端侧推理芯片、垂直场景集成商与运维服务商。",
-      "beginnerOpportunity": "不懂硬件也能切入：用开源基模加仿真环境做一个极窄场景的 Demo（如桌面整理、货架盘点），把复现视频与数据回传社区，是进入生态支持名单与拿到真机时长最有效的路径。"
+      "coreLogic": "机器人基模把空间记忆和任务记忆解耦，端侧可跑降低部署门槛；整机厂开放“大小脑”和真机验证资源，使开发者从重复造轮子转向场景应用，生态飞轮开始形成。",
+      "beneficiaries": "机器人本体、传感器、端侧AI芯片、仿真平台、灵巧手、行业集成商",
+      "beginnerOpportunity": "用开源基模加仿真环境做垂直场景demo，或成为区域行业集成商，把机器人能力包装成巡检、配送等可交付方案。"
     },
     {
-      "title": "02. Agent 运行时与上下文工程基础设施",
-      "horizon": "6–18 个月",
-      "heatScore": 91,
-      "relatedNews": [
-        "hermes-agent 登顶 GitHub 趋势",
-        "推理基础设施六项目横向对比"
-      ],
-      "coreLogic": "基础模型能力趋于同质后，产品差异转移到记忆、工具调用与上下文编排。hermes-agent 代表的「可累积技能」范式说明 Agent 从一次性任务执行器变成长期资产，而 vLLM、SGLang、llama.cpp 与 Ollama 的分层则提供了不同成本档位的运行时底座，两者共同构成 Agent 应用的完整技术栈。",
-      "beneficiaries": "推理框架与模型路由中间件、Agent 编排框架、记忆与向量存储、Agent 可观测与自动评测工具、私有化部署服务商。",
-      "beginnerOpportunity": "从「给自己的重复劳动写一条技能」开始：选一个框架本地跑通，把一周内高频重复的三件小事写成可复用技能，积累的就是个人 Agent 资产，也是最实在的简历项目。"
-    },
-    {
-      "title": "03. 训练数据与 Token 产能的要素市场",
+      "title": "02. AI训练数据与编码数据市场",
       "horizon": "3–12 个月",
+      "heatScore": 90,
+      "relatedNews": [
+        "编码数据市场爆发",
+        "AI训练数据市场分层定价"
+      ],
+      "coreLogic": "前沿实验室为独占的高质量代码和推理轨迹支付溢价，数据从爬取品变为授权资产；小规模试点到扩大采购形成标准化供应链，数据质量与授权条款成为定价核心。",
+      "beneficiaries": "数据标注、合成数据、代码评测、数据合规与交易平台",
+      "beginnerOpportunity": "整理垂直领域高质量数据包，提供清洗、标注和评测小工具，从细分场景切入数据供应链。"
+    },
+    {
+      "title": "03. Agent基础设施与低代码工作流",
+      "horizon": "3–12 个月",
+      "heatScore": 92,
+      "relatedNews": [
+        "Hermes-Agent登顶GitHub趋势",
+        "Dify低代码工作流持续霸榜",
+        "AI CLI工具七强混战"
+      ],
+      "coreLogic": "Agent从一次性对话转向持久记忆和自我改进，CLI与低代码平台降低构建门槛；企业需要可自托管、可观测、多模型路由的Agent栈，工具层竞争进入白热化。",
+      "beneficiaries": "Agent框架、LLM API、工作流编排、CLI工具、记忆存储、可观测性",
+      "beginnerOpportunity": "用Dify搭建业务Agent，或用hermes-agent做个人助手，积累可复用的行业工作流模板。"
+    },
+    {
+      "title": "04. 上下文工程与推理增强",
+      "horizon": "6–18 个月",
       "heatScore": 86,
       "relatedNews": [
-        "编码训练数据市场爆发",
-        "商汤 Token 工厂获最高评级"
+        "LLM作为上下文工程师",
+        "DART多样替代推理轨迹"
       ],
-      "coreLogic": "数据与推理算力正在被标准化为可计价、可独占授权的生产要素：数据端出现独占溢价与共享折扣的双轨定价，算力端出现以单位 Token 产能为标准的第三方评级。定价与评级一旦确立，交易摩擦大幅下降，市场从私下撮合走向可规模化流通，供给方从人力外包升级为资产运营方。",
-      "beneficiaries": "代码轨迹与合成数据供应商、专业标注与质检团队、数据授权合规与审计服务、推理服务与智算中心运营商、Token 计费中间件。",
-      "beginnerOpportunity": "先做「合规的极小批量」：把自有且已授权的高质量数据按标准字段整理成可训练数据集，接一单小额试单并附上去重与脱敏报告，用可验证的质量换取复购，比自己造模型更容易变现。"
-    },
-    {
-      "title": "04. 算力地缘政治与推理成本重构",
-      "horizon": "3–12 个月",
-      "heatScore": 82,
-      "relatedNews": [
-        "英伟达暂停向东南亚发运服务器",
-        "DeepSeek 上线聊天账单"
-      ],
-      "coreLogic": "供给端，出口管制封堵转口路径使算力按地缘政治分区定价，交付周期与租赁价格波动加剧；需求端，免费推理补贴退坡使按量计费成为常态。两端同时挤压，逼迫企业从「堆大模型」转向「按场景挑模型」，模型路由、端侧推理与成本优化工具的确定性需求随之抬升。",
-      "beneficiaries": "国产算力与先进封装、区域云与算力租赁、模型路由与成本优化工具、端侧与边缘推理芯片、模型小型化与蒸馏服务商。",
-      "beginnerOpportunity": "把「省成本」做成可展示的能力：给自己的项目搭一套双通道模型路由（贵模型处理难任务、小模型处理简单任务），记录成本下降与质量损失数据，这类实测报告在当下比再训一个模型更有市场。"
+      "coreLogic": "模型能力趋同后，上下文构造和后训练数据多样性成为性能杠杆；自动上下文工程和轨迹挖掘把手工提示变成可复用资产，推理增强从“堆算力”转向“优数据”。",
+      "beneficiaries": "提示管理、记忆系统、推理模型、教育智能体、评测服务",
+      "beginnerOpportunity": "建立行业上下文卡片库，做提示模板和评测小工具，帮助团队把经验沉淀为可复用资产。"
     }
   ],
   "workshops": [
     {
       "id": "w1",
-      "toolName": "hermes-agent",
-      "tag": "零门槛 · 5分钟上手",
-      "problem": "想让 AI 助手记住你的偏好和常用流程，而不是每次开新对话都重新解释一遍。",
-      "analogy": "像雇了一个会写工作手册的助理，教过一次的活儿，下次它自己翻出笔记照着做。",
-      "promptLabel": "一键复制 · 本地安装命令",
-      "copyText": "git clone https://github.com/NousResearch/hermes-agent.git\ncd hermes-agent\npython -m venv .venv && source .venv/bin/activate\npip install -e .\n# 装好后先看帮助，确认命令可用\nhermes --help",
+      "toolName": "Dify 低代码工作流",
+      "tag": "零门槛 · 10分钟搭出AI工作流",
+      "problem": "想把重复任务自动化但不会写代码。",
+      "analogy": "像搭积木一样拼出一个AI员工：把查资料、写答案、发邮件等积木拖到一起就能跑。",
+      "promptLabel": "一键复制 · Docker启动命令",
+      "copyText": "git clone https://github.com/langgenius/dify.git\ncd dify/docker\ncp .env.example .env\ndocker compose up -d\n# 启动后访问 http://localhost:3000",
       "steps": [
-        "打开终端，把上面的命令整段粘贴执行，装完看到 hermes 的帮助信息就说明环境通了。",
-        "用最简配置跑一次带工具调用的对话，比如让它列出当前目录的文件，确认工具链路正常。",
-        "把你每天重复的一件小事写成一条技能存进去，一周后回看记忆文件，删掉无效条目、保留有效流程。"
+        "安装Docker并执行上方命令启动Dify",
+        "在控制台新建工作流，接入LLM和知识库，拖入开始-检索-生成-结束节点",
+        "在调试面板测试问题，发布为网页或API分享给同事"
+      ],
+      "link": "https://github.com/langgenius/dify"
+    },
+    {
+      "id": "w2",
+      "toolName": "Hermes-Agent 自进化助手",
+      "tag": "零门槛 · 15分钟上手",
+      "problem": "想要一个会记住偏好、越用越顺手的个人Agent。",
+      "analogy": "像带工作笔记的实习生：每次做完事都记下你的偏好，下次不用重新交代。",
+      "promptLabel": "一键复制 · 安装与运行命令",
+      "copyText": "git clone https://github.com/NousResearch/hermes-agent.git\ncd hermes-agent\npip install -r requirements.txt\nexport OPENAI_API_KEY=\"你的API Key\"\npython main.py",
+      "steps": [
+        "克隆仓库并按README安装依赖，配置LLM API Key",
+        "运行示例Agent，给它一个重复性任务并允许它记录偏好",
+        "第二次运行同一任务，检查它是否调用历史记忆减少你的指令"
       ],
       "link": "https://github.com/NousResearch/hermes-agent"
     },
     {
-      "id": "w2",
-      "toolName": "Ollama + llama.cpp 本地推理",
-      "tag": "零门槛 · 5分钟上手",
-      "problem": "担心 API 开始按量计费、又想让常用的小模型免费且断网也能跑在自己电脑上。",
-      "analogy": "像把一台迷你咖啡机搬回家，不用再去店里排队，也不用按杯付钱。",
-      "promptLabel": "一键复制 · 安装与首次运行",
-      "copyText": "curl -fsSL https://ollama.com/install.sh | sh\n# 拉取并运行一个中等规模的中文模型\nollama run qwen3:8b\n# 另开一个终端，查看本地模型与内存占用\nollama ps",
-      "steps": [
-        "先确认电脑内存至少16GB（推荐32GB），显存紧张也没关系，llama.cpp 后端会自动把部分层放到 CPU。",
-        "执行安装命令并运行模型，随便问一个问题验证能正常输出中文。",
-        "打开任务管理器或活动监视器记录推理时的内存占用，换算成「每秒多少字」，作为是否值得本地部署的判断依据。"
-      ],
-      "link": "https://github.com/duanyytop/agents-radar/issues/4520"
-    },
-    {
       "id": "w3",
-      "toolName": "上下文工程三件套提示词",
+      "toolName": "上下文卡片法",
       "tag": "零门槛 · 5分钟上手",
-      "problem": "自动优化提示词常常越调越差，却说不清到底哪里退化了。",
-      "analogy": "像学生的错题本背太熟，题型一换就不会，所以要留一套没见过的卷子定期摸底。",
-      "promptLabel": "一键复制 · 自优化提示词模板",
-      "copyText": "你是我的提示词工程师。我会给你三部分内容：\n【原始任务描述】【旧版提示词】【训练集示例】\n请执行：\n1) 从训练集示例中提炼3条可迁移的通用指令；\n2) 输出一版改写后的新提示词，只保留这3条指令，不要照抄示例中的具体内容；\n3) 列出这版提示词最可能在什么情况下失效，以及失效时的判断信号。\n注意：你只能看到训练集，严禁假设盲测集内容。输出用中文，分三小节。",
+      "problem": "提示词每次重写、经验不沉淀、跨任务迁移差。",
+      "analogy": "让AI自己整理错题本：把做过的任务总结成下次可翻看的卡片。",
+      "promptLabel": "一键复制 · 上下文卡片提炼模板",
+      "copyText": "你是我的上下文工程师。请针对任务【填写任务】执行以下步骤：\n1. 先给出执行计划并完成一次；\n2. 复盘本次成功/失败原因；\n3. 提炼3-5条可复用“上下文卡片”，每条包含：适用场景、规则、示例、禁忌；\n4. 输出为Markdown表格，方便我下次直接粘贴。",
       "steps": [
-        "把你的提示词分成「训练集」和「盲测集」两份文件，盲测那份在调优期间坚决不看。",
-        "把训练集和旧版提示词一起粘贴进上面的模板，拿到新版提示词后立刻在盲测集上打分。",
-        "同时保留旧版提示词，只要盲测分数下降就一键回滚，绝不靠感觉保留「看起来更漂亮」的版本。"
+        "把模板中的【填写任务】替换成你反复要做的事，让LLM执行并复盘",
+        "保存它输出的上下文卡片表格",
+        "新任务中只贴入这些卡片，对比无卡片时的准确率与耗时"
       ],
       "link": "https://huggingface.co/papers/2611.30494"
     },
     {
       "id": "w4",
-      "toolName": "「先描述后作答」视觉自检法",
+      "toolName": "Gemini CLI 终端助手",
       "tag": "零门槛 · 5分钟上手",
-      "problem": "听说让模型画张辅助图再答题会更强，但不确定对自己任务是真有用还是白花算力。",
-      "analogy": "像答题前先在草稿纸画示意图，画错反而把本来会的题带偏，所以先小样本试一次再决定。",
-      "promptLabel": "一键复制 · A/B 对照测试模板",
-      "copyText": "我会给你一张图片和一个问题。请分两轮回答：\n【A轮·直接作答】只看原图，直接给出答案与置信度(0-1)。\n【B轮·辅助图自检】先用一句话描述「如果有一张辅助图，它会画什么、标注什么」，再结合原图与这段描述给出答案与置信度(0-1)。\n最后用一行对比：A轮与B轮的答案是否一致、哪一轮置信度更高、你建议以后用哪一轮。\n问题：{在此粘贴你的问题}\n图片：{在此上传图片}",
+      "problem": "想在终端里让AI直接读写代码、修bug，但不想配置复杂IDE插件。",
+      "analogy": "给终端装一个会看文件的AI副驾：你说人话，它在命令行里帮你改代码。",
+      "promptLabel": "一键复制 · 安装并启动命令",
+      "copyText": "npm install -g @google/gemini-cli\ngemini\n# 登录后输入：读取当前目录README，并生成一个示例函数",
       "steps": [
-        "挑20条你真实业务里的图片问题，用上面的模板各跑一遍，把两轮答案抄进表格。",
-        "只统计两个数字：准确率与响应时间，如果B轮更慢又没更准，就说明这个方法对你不成立。",
-        "在产品里把「生成辅助描述」做成可开关选项而不是默认流程，并把这次的对照结论写进团队文档。"
+        "安装Node.js后执行上方npm安装命令",
+        "运行gemini并完成登录授权",
+        "在一个测试代码目录中让它“读取README并生成一个函数”，检查生成结果"
       ],
-      "link": "https://arxiv.org/abs/2611.34935v1"
+      "link": "https://github.com/duanyytop/agents-radar/issues/4518"
     }
   ]
 }
