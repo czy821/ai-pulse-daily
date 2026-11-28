@@ -2,18 +2,18 @@
   "editionDate": "2026-11-28",
   "editorialTakeaways": [
     {
-      "label": "具身智能进入记忆复用与生态开放期",
-      "text": "今日两条机器人新闻形成呼应：首个带跨任务空间记忆的原生基模开源并可在端侧运行，众擎开放人形机器人“大小脑”并推出10亿元生态计划。信号很明确——具身智能的竞争正从单机演示转向可复用记忆、真机验证与开发者生态，端侧部署和场景集成将成为下一阶段分水岭。"
+      "label": "具身智能进入端侧基座+开放生态",
+      "text": "今日两条机器人主线相互印证：一边是带跨任务空间记忆的原生基模开源、可在机器人端侧运行；另一边是众擎开放大小脑并推出10亿级产业生态支持。竞争焦点正从单任务真机demo，转向可复用基座、空间记忆与开发者平台，谁能降低真机验证复用成本，谁就能加速场景落地。"
     },
     {
-      "label": "AI竞争转向数据与算力供应链",
-      "text": "编码数据市场出现独占溢价与非独占折扣的分层定价，英伟达暂停对东南亚服务器出货，商汤Token工厂获最高评级。三件事共同说明：高质量数据授权、算力合规与Token化服务正在成为新的护城河，单纯堆模型参数已不足以解释竞争格局。"
+      "label": "Agent工程化与数据/安全供应链同步收紧",
+      "text": "编码数据市场开始形成独家溢价与非独家折扣的定价机制，CLI编码Agent、Hermes记忆型Agent与Dify低代码工作流显示Agent正进入生产流程；但Markdown规则文件并非防火墙，英伟达暂停东南亚部分服务器出货也提醒算力供应链风险。Agent商业化与安全风控必须双轨推进。"
     }
   ],
   "items": [
     {
       "id": "n1",
-      "title": "首个带跨任务空间记忆的原生基模开源，机器人端侧可跑",
+      "title": "首个带跨任务空间记忆的原生基模开源：机器人端侧可跑",
       "source": "机器之心/量子位",
       "category": "具身智能",
       "readMinutes": 3,
@@ -22,108 +22,130 @@
       "publishedAt": "2026-11-27",
       "quickPick": true,
       "url": "https://www.qbitai.com/2026/11/513227.html",
-      "summary": "11月27日，机器之心/量子位报道，首个带跨任务空间记忆的原生机器人基模开源，可在端侧运行。该模型把地图记忆与任务记忆解耦，支持跨任务复用空间信息，并能在运行中随时修正地图；团队在真机上验证了导航、操作等任务。开源意味着开发者可直接在本地机器人上二次开发，降低具身智能应用门槛。",
-      "englishSummary": "A new open-source native foundation model for robots, featuring cross-task spatial memory, was released and can run on-device. It decouples map and task memory so spatial information can be reused across tasks and corrected on the fly. The release lowers the barrier for developers to build embodied AI applications on local robots.",
-      "problemSolved": "机器人跨任务重复建图、空间记忆无法复用、端侧部署门槛高。",
-      "beginnerAnalogy": "像给机器人装了一个“可随身携带且能随时修改的活地图”，换任务不用重新认路。",
+      "summary": "量子位报道，首个带跨任务空间记忆的原生机器人基模开源，可在机器人端侧运行；核心是地图可随时修正、记忆可跨任务复用。相较每个任务单独采集数据，该方案让机器人在新场景中调用历史空间经验，降低部署与调参成本，标志具身智能从单任务demo走向可复用基座。",
+      "englishSummary": "A native robot foundation model with cross-task spatial memory has been open-sourced and can run on-device, according to QbitAI. It supports on-the-fly map correction and reuse of spatial memory across tasks, reducing data collection and deployment costs for new scenarios. The release signals a shift from single-task robot demos to reusable embodied AI bases.",
+      "problemSolved": "解决机器人每换一个任务或场景就要重新建图、采数据、调策略，空间经验无法复用的问题。",
+      "beginnerAnalogy": "像给机器人装了一本可更新的工作手册和地图记忆，换房间不用从零学，翻旧笔记就能上手。",
       "beginnerSteps": [
-        "在开源仓库拉取模型与示例代码，准备一台带RGB-D相机的机器人或仿真环境",
-        "按文档录制一段室内路径，让模型建立初始空间记忆",
-        "切换到新任务，观察模型复用地图并在遮挡变化时自动修正"
+        "用手机或仿真环境录一段房间/工位视频，标出5个关键物体和可通行路线。",
+        "让多模态模型把视频整理成空间记忆卡：物体位置、进入方式、禁忌区域。",
+        "在新任务提示中先检索这张记忆卡，再让机器人或Agent规划动作，并把失败点回写。"
       ],
-      "industryImpact": "推动具身智能从单任务演示走向可复用记忆的端侧部署，利好服务机器人、仓储机器人、仿真平台与边缘芯片。"
+      "industryImpact": "推动人形机器人和移动机器人从项目制交付转向基座加行业微调，利好端侧算力、传感器、仿真数据与机器人中间件。"
     },
     {
       "id": "n2",
-      "title": "众擎开放人形机器人“大小脑”，10亿产业级生态计划来了",
+      "title": "众擎开放大小脑并推10亿产业级生态支持计划",
       "source": "机器之心/量子位",
-      "category": "人形机器人",
+      "category": "机器人生态",
       "readMinutes": 2,
       "signal": "opportunity",
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-27",
       "quickPick": false,
       "url": "https://www.qbitai.com/2026/11/513352.html",
-      "summary": "11月27日，众擎机器人宣布开放人形机器人“大小脑”开发能力，并推出10亿元产业级生态支持计划。“大小脑”分别对应高层任务规划与底层运动控制，开发者可在统一平台上调用感知、决策与执行模块。该计划面向高校、创业团队和行业集成商，提供真机验证、资金与场景对接，试图把单团队成果沉淀为可复用的开发者起点。",
-      "englishSummary": "Zhongqing Robotics opened its humanoid robot “large brain/small brain” development stack and launched a 1-billion-yuan ecosystem support plan. The platform separates high-level planning from low-level motion control and offers real-machine validation, funding and scenario access to developers. It aims to turn one team’s results into reusable building blocks for the broader ecosystem.",
-      "problemSolved": "人形机器人开发重复造轮子、真机验证成本高、场景与资金资源分散。",
-      "beginnerAnalogy": "像安卓开放系统给手机开发者：不用从造手机开始，直接调用“大脑想任务、小脑管动作”的模块做应用。",
+      "summary": "量子位报道，众擎面向人形机器人开发者开放大小脑能力，并推出10亿元级产业生态支持计划。其思路是让一支团队在真机上验证的成果成为下一支团队的开发起点，降低重复造轮子成本，推动开发者围绕运动控制、任务规划与场景应用形成生态。",
+      "englishSummary": "Zhongqing has opened its humanoid robot brain and cerebellum capabilities to developers and launched a 10-billion-yuan-scale industry ecosystem support plan. The plan aims to turn one team's real-machine validation into a starting point for others, reducing duplicated development. It signals a platform-driven approach to humanoid robotics.",
+      "problemSolved": "解决人形机器人开发门槛高、真机验证成果难以复用、每个团队重复造轮子的问题。",
+      "beginnerAnalogy": "像机器人界的安卓开放平台：有人把能跑通的运动控制和应用模板放上架，后来者直接二次开发。",
       "beginnerSteps": [
-        "关注众擎开发者平台开放申请入口，提交团队或项目简介",
-        "下载SDK与仿真示例，先跑通一个抓取或导航demo",
-        "申请真机验证名额，把demo迁移到实体机器人并记录失败案例"
+        "先列出你想做的垂直场景，如巡检、导览或分拣，明确需要哪些运动与交互能力。",
+        "在开放平台找最接近的真机demo，记录其传感器配置、控制频率和失败边界。",
+        "用仿真复现demo，再只改一个变量做小步验证，避免全栈重写。"
       ],
-      "industryImpact": "人形机器人产业从整机竞赛转向开发者生态竞赛，利好核心零部件、灵巧手、运动控制、场景集成商。"
+      "industryImpact": "加速人形机器人开发者生态和模块复用，利好人形机器人本体供应链、场景集成商、仿真平台与培训服务。"
     },
     {
       "id": "n3",
+      "title": "DeepSeek App双端上线聊天账单，收费猜测升温",
+      "source": "机器之心/量子位",
+      "category": "商业化",
+      "readMinutes": 2,
+      "signal": "watch",
+      "signalLabel": "🟡 重点关注",
+      "publishedAt": "2026-11-27",
+      "quickPick": false,
+      "url": "https://www.qbitai.com/2026/11/513305.html",
+      "summary": "量子位报道，DeepSeek网页端与App端突然更新并展示聊天账单，引发网友对是否要收费的猜测。目前公开信息仅显示双端亮出账单，尚未给出正式收费方案；但账单透明度提升通常意味着用量计量、分层订阅或企业计费正在铺垫，值得持续观察。",
+      "englishSummary": "DeepSeek's web and app clients have begun showing chat bills, prompting speculation about future paid tiers. No official pricing plan has been confirmed in the report, but usage metering often precedes subscription or enterprise billing. The move is a signal to watch for the economics of low-cost LLM services.",
+      "problemSolved": "解决用户对AI服务用量不透明、免费额度不可预期的问题，至少开始展示账单。",
+      "beginnerAnalogy": "像手机流量从随便用变成能看到本月用了多少MB，下一步可能就有套餐。",
+      "beginnerSteps": [
+        "打开DeepSeek网页或App设置，找到账单或用量入口，截图记录当前免费额度。",
+        "把常用任务按轻、中、重三档记录消耗，估算如果收费每月成本。",
+        "提前准备替代方案，如本地模型或其他API，避免单一服务调价影响工作流。"
+      ],
+      "industryImpact": "大模型免费获客阶段逐步转向用量计费，利好成本优化、模型路由与本地推理工具，也提醒开发者做多模型冗余。"
+    },
+    {
+      "id": "n4",
       "title": "编码数据市场爆发：前沿实验室如何购买训练数据",
       "source": "AI News / The Batch",
-      "category": "AI训练数据",
+      "category": "数据市场",
       "readMinutes": 3,
       "signal": "opportunity",
       "signalLabel": "🟢 高潜机遇",
       "publishedAt": "2026-11-28",
       "quickPick": true,
       "url": "https://latent.space/p/ainews-inside-the-exploding-coding-data-market/",
-      "summary": "11月28日，AI News/The Batch梳理“编码数据市场”的爆发：前沿实验室愿意为独占的高质量代码与推理轨迹支付溢价，非独占数据则打折出售。文章披露实验室如何评估数据质量、做小规模试点再扩大采购，以及数据供应商如何围绕代码、测试和真实工程任务构建产品。训练数据正从“爬取即可”变成有分层定价和独家授权的市场。",
-      "englishSummary": "AI News/The Batch examines the exploding coding-data market, where frontier labs pay a premium for exclusive high-quality code and reasoning traces while discounted data can be shared. The piece details quality evaluation, pilot-to-scale purchasing, and how vendors package code, tests and real engineering tasks. Training data is becoming a tiered, licensed market rather than a crawl-first commodity.",
-      "problemSolved": "高质量代码训练数据稀缺、定价与授权不透明、实验室采购决策困难。",
-      "beginnerAnalogy": "像顶级餐厅买食材：独家供应的好食材更贵，大家都能买到的则打折；数据供应商就是“食材买手”。",
+      "summary": "Latent Space的AINews梳理了正在爆发的编码数据市场：前沿实验室会为可独家保留的训练数据支付溢价，对可被其他实验室购买的数据要求折扣；小规模试点订单验证质量后再放大。高质量coding data正从爬取素材变成有定价、有排他条款、有专家标注的供应链。",
+      "englishSummary": "AINews examines the exploding market for coding training data. Frontier labs pay a premium for exclusive data and negotiate discounts for non-exclusive data, often starting with small pilot orders before scaling. High-quality coding data is becoming a priced supply chain with exclusivity terms and expert annotation.",
+      "problemSolved": "解决前沿模型缺乏高质量、可合规、可排他的编码训练数据，以及数据交易定价不透明的问题。",
+      "beginnerAnalogy": "像给AI找特级家教：独家请来的老师更贵，大家都能请的可以打折，先试课再签大单。",
       "beginnerSteps": [
-        "盘点自己可合法授权的代码/测试/工程日志，按领域和难度打标签",
-        "先做100-500条小样本包，附质量说明与评测结果，联系数据平台或实验室试点",
-        "根据反馈迭代数据格式，明确独占/非独占授权与定价"
+        "选一个你熟悉的编程主题，整理30条问题、标准答案和易错点样本。",
+        "让AI帮你做去重、难度分级和版权来源标注，形成微型数据包。",
+        "用10条留出题做评测，证明数据包能提升小模型表现，再考虑扩大或出售。"
       ],
-      "industryImpact": "催生代码数据标注、合成数据、数据合规与交易平台，改变大模型预训练与后训练的成本结构。"
+      "industryImpact": "数据标注、专家网络、合成数据、版权合规和评测基准将受益；模型竞争部分转向数据供应链竞争。"
     },
     {
-      "id": "n4",
-      "title": "英伟达暂停对东南亚服务器出货，芯片管制升级",
+      "id": "n5",
+      "title": "英伟达暂停向东南亚部分国家出货AI服务器",
       "source": "AI News / The Batch",
-      "category": "算力供应链",
+      "category": "供应链",
       "readMinutes": 2,
       "signal": "alert",
       "signalLabel": "🔴 风险/格局预警",
       "publishedAt": "2026-11-26",
       "quickPick": false,
       "url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
-      "summary": "11月26日，TechCrunch报道英伟达已通知制造伙伴暂停向马来西亚、新加坡、泰国和印度尼西亚交付服务器，原因是美国进一步收紧AI芯片流向中国的管制。该暂停覆盖部分服务器整机与GPU系统，可能影响东南亚数据中心建设与转口贸易。分析认为，区域AI算力部署将出现延迟，云厂商需重新规划节点，黑市与转口风险上升。",
-      "englishSummary": "Nvidia has told manufacturing partners to pause server shipments to Malaysia, Singapore, Thailand and Indonesia as the U.S. tightens rules to keep AI chips out of China. The pause affects some server systems and GPU deployments, potentially delaying Southeast Asian data-center buildouts and re-export trade. Cloud providers may need to replan capacity while diversion risks rise.",
-      "problemSolved": "表面解决出口管制合规，实际暴露全球AI算力供应链的区域断点。",
-      "beginnerAnalogy": "像高速公路突然设卡查货：不是没货，而是货要绕路、等检查，沿途加油站生意受影响。",
+      "summary": "TechCrunch报道，英伟达已通知制造伙伴暂停向马来西亚、新加坡、泰国和印度尼西亚运送服务器，原因是美国进一步收紧防止AI芯片流入中国的措施。此举将扰动东南亚数据中心交付节奏，并促使区域云厂商重新评估算力采购与转口合规风险。",
+      "englishSummary": "Nvidia has told manufacturing partners to pause server shipments to Malaysia, Singapore, Thailand and Indonesia as the U.S. tightens restrictions aimed at keeping AI chips out of China. The pause could disrupt data-center delivery schedules in Southeast Asia. Regional cloud providers may need to reassess procurement and re-export compliance.",
+      "problemSolved": "从政策方视角看是降低AI芯片经东南亚转口流入中国的风险，但给企业带来交付不确定性。",
+      "beginnerAnalogy": "像快递公司突然暂停发往几个中转站，怕包裹被转运到禁运地址，买家和卖家都要改路线。",
       "beginnerSteps": [
-        "检查自己的云资源或服务器采购是否依赖东南亚节点，列出替代区域",
-        "与供应商确认交付时间与合规证明，预留2-4周缓冲",
-        "把非敏感推理任务迁到多区域架构，避免单点断供"
+        "盘点你依赖的云算力区域，标注是否涉及东南亚中转或美系芯片。",
+        "为关键训练和推理任务准备替代区域，以及国产或其他加速卡方案。",
+        "在采购合同中加入交付延迟与出口管制变化条款，保留迁移窗口。"
       ],
-      "industryImpact": "加剧AI算力区域化，利好本土算力、液冷数据中心、边缘推理与合规服务，短期利空东南亚IDC。"
+      "industryImpact": "加速算力供应链区域化，利好区域云、国产算力、合规咨询与算力调度；短期利空依赖东南亚交付的AI项目。"
     },
     {
-      "id": "n5",
-      "title": "AI CLI工具社区日报：Claude Code、Codex、Gemini CLI等七工具混战",
+      "id": "n6",
+      "title": "AI CLI工具社区日报：编码Agent进入多工具竞速",
       "source": "RadarAI",
-      "category": "AI开发工具",
+      "category": "开发者工具",
       "readMinutes": 2,
       "signal": "watch",
       "signalLabel": "🟡 重点关注",
       "publishedAt": "2026-11-28",
       "quickPick": false,
       "url": "https://github.com/duanyytop/agents-radar/issues/4518",
-      "summary": "11月28日，RadarAI发布AI CLI工具社区日报，覆盖Claude Code、OpenAI Codex、Gemini CLI、GitHub Copilot CLI、OpenCode、Pi、Qwen Code等七款工具。日报汇总各项目的Issue、PR与版本动态，显示CLI正成为编码Agent的主要入口：多模型切换、本地文件操作、终端内自动修复成为标配。社区讨论集中在权限控制、上下文窗口和跨工具兼容性。",
-      "englishSummary": "RadarAI’s AI CLI Tools Digest covers seven tools including Claude Code, OpenAI Codex, Gemini CLI, GitHub Copilot CLI, OpenCode, Pi and Qwen Code. The digest tracks issues, PRs and releases, showing CLI as a key entry point for coding agents with multi-model switching, local file operations and in-terminal fixes. Community debate focuses on permissions, context windows and cross-tool compatibility.",
-      "problemSolved": "开发者面对众多AI CLI工具难以选型、跟踪更新和比较能力。",
-      "beginnerAnalogy": "像手机应用商店的“本周工具榜”，把七个热门AI终端助手的变化一次列清。",
+      "summary": "RadarAI汇总2026-11-28的AI CLI工具社区动态，覆盖Claude Code、OpenAI Codex、Gemini CLI、GitHub Copilot CLI、OpenCode、Pi、Qwen Code等7款工具。编码Agent的竞争焦点正从能不能写代码，转向多文件修改、终端操作、权限控制与团队协作，社区迭代速度显著加快。",
+      "englishSummary": "RadarAI's AI CLI digest tracks seven coding-agent tools including Claude Code, OpenAI Codex, Gemini CLI, GitHub Copilot CLI, OpenCode, Pi and Qwen Code. Competition is shifting from code generation to multi-file edits, terminal operation, permission control and team workflows. Community iteration is fast.",
+      "problemSolved": "解决开发者面对众多编码Agent难以跟踪更新、选型和比较能力边界的问题。",
+      "beginnerAnalogy": "像手机应用商店的本周新功能榜，告诉你哪个AI编程助手又学会了新技能。",
       "beginnerSteps": [
-        "从日报中选一个与现有模型订阅匹配的CLI工具，如Gemini CLI或Qwen Code",
-        "按官方文档完成安装与登录，在测试仓库中让它生成一个函数",
-        "对比生成结果与权限提示，记录最适合自己工作流的工具"
+        "选2款CLI Agent，用同一个20行小脚本让它们做解释、改错和写测试。",
+        "记录成功率、需要人工纠正次数和权限提示，做一张对比表。",
+        "把胜出工具接入只读仓库试用一周，再决定是否开放写权限。"
       ],
-      "industryImpact": "推动编码Agent从IDE插件转向终端原生，利好CLI工具链、权限审计、多模型路由。"
+      "industryImpact": "编码Agent将从IDE插件走向终端原生工作流，利好LLMOps、权限审计、代码托管与开发者平台。"
     },
     {
-      "id": "n6",
-      "title": "Hermes-Agent登顶GitHub趋势：会“成长”的Agent",
+      "id": "n7",
+      "title": "Hermes Agent登顶GitHub Trending：会成长的Agent受追捧",
       "source": "GitHub Trending",
       "category": "Agent框架",
       "readMinutes": 3,
@@ -132,20 +154,20 @@
       "publishedAt": "2026-11-28",
       "quickPick": true,
       "url": "https://github.com/NousResearch/hermes-agent",
-      "summary": "11月28日，NousResearch的hermes-agent登上GitHub Trending，星标约26.7万。项目定位为“与你一起成长的Agent”，强调可持久化记忆、工具调用与自我改进循环，让Agent在长期使用中积累偏好和任务经验。仓库提供统一的Agent循环、工具接口与示例，适合开发者构建个人助理、研究助手和自动化工作流。高星标反映社区对可进化Agent框架的强烈需求。",
-      "englishSummary": "NousResearch’s hermes-agent trended on GitHub with about 267k stars, positioned as “the agent that grows with you.” It emphasizes persistent memory, tool use and self-improvement loops so the agent accumulates preferences and task experience over time. The repo offers a unified agent loop, tool interfaces and examples for personal assistants and automation.",
-      "problemSolved": "传统Agent每次对话从零开始、无法积累长期经验、工具集成碎片化。",
-      "beginnerAnalogy": "像招了一个会写工作笔记的实习生：每次做完事都记下你的偏好，下次不用重新交代。",
+      "summary": "NousResearch/hermes-agent以约26.6万星标登上GitHub Trending，项目定位是与你一起成长的Agent。其热度反映开发者对可积累记忆、可复用技能和长期协作型Agent的兴趣；相比一次性聊天，这类框架强调把历史经验沉淀为后续任务的能力。",
+      "englishSummary": "NousResearch/hermes-agent tops GitHub Trending with roughly 266k stars, positioned as the agent that grows with you. The popularity reflects demand for agents that accumulate memory, reuse skills and collaborate over time. It marks a shift from one-off chat toward persistent agent frameworks.",
+      "problemSolved": "解决Agent每次任务都从零开始、无法积累个人偏好与历史经验的问题。",
+      "beginnerAnalogy": "像请一个会记工作笔记的助理，干得越久越懂你，而不是每天失忆的新人。",
       "beginnerSteps": [
-        "克隆仓库并安装依赖，配置一个LLM API Key",
-        "运行示例Agent，给它一个重复性任务（如整理日报）并允许它记录偏好",
-        "第二次运行同一任务，检查它是否调用历史记忆减少你的指令"
+        "给Agent建一个长期记忆文件夹，只存偏好、常用模板和失败教训。",
+        "每次任务结束让它写3行复盘：做了什么、哪里错、下次怎么改。",
+        "下一轮先让Agent读取复盘再执行，观察重复错误是否下降。"
       ],
-      "industryImpact": "推动Agent从一次性工具走向长期个人化/企业化，利好记忆存储、向量数据库、工具生态与Agent评测。"
+      "industryImpact": "记忆与技能复用将成为Agent平台核心差异，利好向量数据库、个人知识库、Agent编排与隐私存储。"
     },
     {
-      "id": "n7",
-      "title": "Dify持续霸榜：低代码搭建Agentic工作流",
+      "id": "n8",
+      "title": "Dify热度走高：低代码编排Agent工作流与RAG",
       "source": "GitHub Trending",
       "category": "低代码AI",
       "readMinutes": 2,
@@ -154,195 +176,173 @@
       "publishedAt": "2026-11-28",
       "quickPick": false,
       "url": "https://github.com/langgenius/dify",
-      "summary": "11月28日，langgenius/dify继续位列GitHub Trending，星标约16.2万。Dify提供可视化工作流编排、RAG管道、模型与工具接入，支持云服务、VPC和自托管部署。用户可拖拽节点搭建Agentic应用，从原型直接走向生产，而不必重搭技术栈。其热度说明“低代码+可自托管”的AI应用平台正成为企业落地Agent的主流选择。",
-      "englishSummary": "langgenius/dify remains on GitHub Trending with about 162k stars, offering visual workflow orchestration, RAG pipelines and model/tool integrations across cloud, VPC and self-hosted deployments. Users can drag-and-drop agentic apps from prototype to production without rebuilding the stack. Its popularity signals demand for low-code, self-hostable AI app platforms.",
-      "problemSolved": "Agent应用开发门槛高、原型到生产需要重复搭建、模型与工具集成复杂。",
-      "beginnerAnalogy": "像搭积木一样拼出AI员工：把“查资料、写答案、发邮件”等积木拖到一起就能跑。",
+      "summary": "langgenius/dify在GitHub Trending保持高位，星标约16.2万。项目主打在同一协作空间构建Agentic workflow与RAG管线，支持多种模型和工具，并可部署在云、VPC或自托管环境，帮助团队从原型走向生产而无需重搭技术栈。",
+      "englishSummary": "langgenius/dify remains high on GitHub Trending with about 162k stars. It lets teams build agentic workflows and RAG pipelines in one workspace with rich model and tool support. It can deploy on cloud, VPC or self-hosted environments, aiming to move prototypes to production without rebuilding the stack.",
+      "problemSolved": "解决AI应用从原型到生产要反复换框架、拼工具、重建RAG与权限体系的问题。",
+      "beginnerAnalogy": "像乐高工作台：把模型、知识库、搜索和判断积木拼成流程，不用从烧砖开始。",
       "beginnerSteps": [
-        "用Docker Compose一键启动Dify社区版，打开本地控制台",
-        "新建一个工作流，接入一个LLM和知识库，拖入“开始-检索-生成-结束”节点",
-        "在调试面板输入问题，发布为API或网页分享给同事"
+        "在Dify新建一个资料问答应用，上传3份公开PDF建知识库。",
+        "用工作流节点串起检索、回答和引用来源，设置找不到答案时转人工。",
+        "用10个真实问题测试命中率，记录错答并调整分段与提示词。"
       ],
-      "industryImpact": "加速企业AI应用平民化，利好低代码平台、RAG中间件、私有化部署与行业解决方案商。"
-    },
-    {
-      "id": "n8",
-      "title": "重新审视LLM作为“上下文工程师”",
-      "source": "Hugging Face",
-      "category": "上下文工程",
-      "readMinutes": 3,
-      "signal": "opportunity",
-      "signalLabel": "🟢 高潜机遇",
-      "publishedAt": "2026-11-22",
-      "quickPick": false,
-      "url": "https://huggingface.co/papers/2611.30494",
-      "summary": "11月22日，Hugging Face论文《Revisiting LLMs as Context Engineers》讨论让LLM自己成为上下文工程师：不依赖密集训练，而是从离线试验中提炼可复用指令、元数据和经验，作为后续任务的上下文。文章梳理了自动上下文工程的方法谱系，并指出其与人类经验学习的相似性和差距。核心结论是：上下文构造正成为与模型能力同等重要的性能杠杆。",
-      "englishSummary": "A Hugging Face paper, “Revisiting LLMs as Context Engineers,” explores casting LLMs as context engineers that distill reusable instructions, metadata and experience from offline trials without intensive training. It surveys automated LLM context engineering and compares it with human experiential learning. The takeaway: context construction is becoming a performance lever as important as model capability.",
-      "problemSolved": "提示工程依赖手工试错、经验难以沉淀、跨任务迁移差。",
-      "beginnerAnalogy": "像让学霸自己整理错题本：不是重新补课，而是把做过的题总结成下次可翻看的笔记。",
-      "beginnerSteps": [
-        "选一个重复任务，让LLM先执行5次并记录成功/失败原因",
-        "要求它把原因提炼成3-5条可复用“上下文卡片”（规则、示例、禁忌）",
-        "在新任务中只贴入这些卡片，对比无卡片时的准确率与耗时"
-      ],
-      "industryImpact": "推动上下文工程工具化，利好提示管理、记忆系统、Agent中间件与评测服务。"
+      "industryImpact": "低代码Agent平台降低企业AI交付门槛，利好行业解决方案商、RAG工具链与自托管云。"
     },
     {
       "id": "n9",
-      "title": "DART：为难题挖掘多样替代推理轨迹",
-      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
-      "category": "推理增强",
+      "title": "Markdown不是防火墙：编码Agent的规则文件边界测试",
+      "source": "Hugging Face",
+      "category": "AI安全",
       "readMinutes": 3,
+      "signal": "alert",
+      "signalLabel": "🔴 风险/格局预警",
+      "publishedAt": "2026-11-19",
+      "quickPick": false,
+      "url": "https://huggingface.co/papers/2611.27112",
+      "summary": "Hugging Face论文测试了团队常用的仓库规则文件能否约束编码Agent。作者用一份278词规则文件，让Claude Code、Codex CLI、Gemini CLI与OpenCode加DeepSeek在20个带隐藏测试的小仓库中工作。结果显示规则文件并不能替代运行时门禁，Agent很少主动查阅贡献规则，安全边界需要权限与测试来兜底。",
+      "englishSummary": "A Hugging Face paper tests whether a repository rules file can constrain coding agents. Using a 278-word rules file, it runs Claude Code, Codex CLI, Gemini CLI and OpenCode with DeepSeek across 20 small repositories with hidden tests. The findings suggest rules files are not a firewall; agents rarely consult contribution rules, so runtime gates and permissions are still needed.",
+      "problemSolved": "解决团队误以为写一份Markdown规则就能安全管控编码Agent的认知盲区。",
+      "beginnerAnalogy": "像在门口贴请勿进入的纸条，但没有锁；自觉的人会看，Agent不一定看。",
+      "beginnerSteps": [
+        "把Agent权限设为只读，先跑一遍仓库，记录它是否读取规则文件。",
+        "在CI加隐藏测试和禁止修改清单，让越界修改直接失败。",
+        "每周做一次红队提示，尝试诱导Agent绕过规则，再补权限而非只改文字。"
+      ],
+      "industryImpact": "Agent安全从提示词约束转向运行时权限、审计与评测，利好AI安全、代码审计和CI/CD门禁。"
+    },
+    {
+      "id": "n10",
+      "title": "生成图像反而拖累视觉推理？13组模型实测平均降3.7分",
+      "source": "arXiv (cs.AI/cs.CL/cs.LG)",
+      "category": "多模态推理",
+      "readMinutes": 2,
       "signal": "watch",
       "signalLabel": "🟡 重点关注",
       "publishedAt": "2026-11-25",
       "quickPick": false,
-      "url": "https://arxiv.org/abs/2611.34928v1",
-      "summary": "11月25日，arXiv论文提出DART（Diverse Alternative Reasoning Traces），用于困难数学题的推理轨迹挖掘。方法从被拒绝的轨迹出发，将其分解为推理步骤，按位置加权不确定性排序，再生成刻意不同的替代轨迹。这样可在独立蒙特卡洛采样难以找到正确轨迹时，提供更多样化的训练信号。论文显示该方法能提升难题后训练的数据效率，为数学推理模型提供新思路。",
-      "englishSummary": "An arXiv paper introduces DART for mining reasoning traces on hard math problems. Starting from rejected traces, it decomposes them into steps, ranks by position-weighted uncertainty and generates deliberately distinct alternatives. This yields diverse training signals when independent Monte Carlo sampling struggles, improving data efficiency for math-reasoning post-training.",
-      "problemSolved": "困难数学题正确轨迹稀疏、独立采样成本高、后训练数据多样性不足。",
-      "beginnerAnalogy": "像解不出题时，不只重算一遍，而是把错题拆成步骤，找出最可疑的一步，再故意换几种思路重走。",
+      "url": "https://arxiv.org/abs/2611.34935v1",
+      "summary": "arXiv论文实证研究让模型先生成辅助图再答题是否提升视觉推理。作者测试13组视觉语言模型与图像生成器配对，生成辅助图后平均准确率下降3.7个百分点，10个任务中9个下降；BAGEL与Janus-Pro-7B也在8个任务上掉分。说明多画一张图并非通用增益，可能引入噪声。",
+      "englishSummary": "An arXiv study tests whether generating a helper image improves visual reasoning. Across 13 vision-language model and generator pairs, generation lowers mean accuracy by 3.7 percentage points, with declines on nine of ten tasks. Two unified models also lose accuracy on eight tasks, suggesting generated images can add noise rather than help.",
+      "problemSolved": "解决生成图像一定能增强多模态推理的想当然假设，提醒团队先评测再上生成式辅助。",
+      "beginnerAnalogy": "像做题时先画一张可能画错的草图，反而把思路带偏；草图不是越多越好。",
       "beginnerSteps": [
-        "收集一批模型做错的数学题及其错误解答",
-        "把错误解答拆成步骤，标出最不确定的步骤并生成2-3种替代思路",
-        "用正确与替代轨迹混合做微调或提示，比较难题通过率"
+        "选20道图表或几何题，先让模型直接答，记录准确率。",
+        "再让模型生成辅助图后答，同一批题对比，算提升还是下降。",
+        "只在特定题型保留生成图步骤，并加人工抽检过滤噪声图。"
       ],
-      "industryImpact": "利好AI4Math、推理模型后训练、教育智能体与自动评测数据生产。"
-    },
-    {
-      "id": "n10",
-      "title": "商汤大装置获“Token工厂”最高评级",
-      "source": "机器之心/量子位",
-      "category": "AI基础设施",
-      "readMinutes": 2,
-      "signal": "watch",
-      "signalLabel": "🟡 重点关注",
-      "publishedAt": "2026-11-27",
-      "quickPick": false,
-      "url": "https://www.qbitai.com/2026/11/513346.html",
-      "summary": "11月27日，商汤大装置Token工厂获中国信通院“Token工厂智算能力评估”的“全栈服务型·领先级”评级，为全国首批首家。该评估从算力调度、模型服务、Token生产效率与稳定性等维度考察AI基础设施。商汤称其可提供从训练到推理的全栈Token生产能力。评级将“Token工厂”概念标准化，反映算力服务正从卖GPU转向卖可计量的模型调用能力。",
-      "englishSummary": "SenseTime’s large-device Token Factory received the top “full-stack service · leading” rating in CAICT’s Token Factory computing-power assessment, the first nationwide. The evaluation covers scheduling, model serving, token-production efficiency and stability. The rating standardizes the “token factory” concept, signaling a shift from selling GPUs to selling metered model-call capacity.",
-      "problemSolved": "算力服务缺乏统一评估标准、Token生产效率与稳定性难比较。",
-      "beginnerAnalogy": "像给“AI发电厂”发等级证书：不看锅炉多大，而看每度电是否稳定、便宜、可计量。",
-      "beginnerSteps": [
-        "关注信通院Token工厂评估指标，列出算力调度、模型服务、稳定性三项",
-        "对比自己使用的云厂商是否公布Token生产效率与SLA",
-        "在小规模推理业务中记录每万Token成本与延迟，作为选型依据"
-      ],
-      "industryImpact": "推动AI算力服务标准化与Token计费模式，利好智算中心、模型服务商、推理优化与算力调度软件。"
+      "industryImpact": "多模态产品需要更精细的何时生成策略，利好评测基准、推理链路由与视觉工具调用，而非盲目堆生成。"
     }
   ],
   "foresightTracks": [
     {
-      "title": "01. 具身智能基础模型与开发者生态",
+      "title": "01. 具身智能端侧基座与机器人记忆系统",
       "horizon": "6–18 个月",
-      "heatScore": 95,
+      "heatScore": 94,
       "relatedNews": [
         "首个带跨任务空间记忆的原生基模开源",
-        "众擎开放大小脑与10亿生态计划"
+        "众擎开放大小脑与10亿产业生态计划"
       ],
-      "coreLogic": "机器人基模把空间记忆和任务记忆解耦，端侧可跑降低部署门槛；整机厂开放“大小脑”和真机验证资源，使开发者从重复造轮子转向场景应用，生态飞轮开始形成。",
-      "beneficiaries": "机器人本体、传感器、端侧AI芯片、仿真平台、灵巧手、行业集成商",
-      "beginnerOpportunity": "用开源基模加仿真环境做垂直场景demo，或成为区域行业集成商，把机器人能力包装成巡检、配送等可交付方案。"
+      "coreLogic": "机器人从单任务demo走向可复用基座，跨任务空间记忆和端侧运行让新场景部署不再从零采数据；开放大小脑与生态计划进一步把真机验证成果变成可复用模块，形成数据、模型、场景的正循环。",
+      "beneficiaries": "机器人本体与关节、传感器、端侧算力芯片、仿真与数据采集、机器人中间件与行业集成商。",
+      "beginnerOpportunity": "用开源机器人基模加仿真环境做垂直场景demo，如巡检、分拣、导览；先积累空间记忆卡、评测集和提示词策略，不必一开始就碰硬件。"
     },
     {
-      "title": "02. AI训练数据与编码数据市场",
+      "title": "02. Agent工程化与CLI/低代码工作流",
       "horizon": "3–12 个月",
-      "heatScore": 90,
+      "heatScore": 91,
       "relatedNews": [
-        "编码数据市场爆发",
-        "AI训练数据市场分层定价"
+        "AI CLI工具社区日报：编码Agent多工具竞速",
+        "Hermes Agent登顶GitHub Trending",
+        "Dify低代码编排Agent工作流"
       ],
-      "coreLogic": "前沿实验室为独占的高质量代码和推理轨迹支付溢价，数据从爬取品变为授权资产；小规模试点到扩大采购形成标准化供应链，数据质量与授权条款成为定价核心。",
-      "beneficiaries": "数据标注、合成数据、代码评测、数据合规与交易平台",
-      "beginnerOpportunity": "整理垂直领域高质量数据包，提供清洗、标注和评测小工具，从细分场景切入数据供应链。"
+      "coreLogic": "Agent正从聊天窗口进入终端、IDE和企业流程，竞争点转向多文件修改、工具调用、记忆复用与可观测性；低代码平台降低交付门槛，CLI工具提升专业开发者效率，两者共同推动Agent从演示走向生产。",
+      "beneficiaries": "开发者工具、LLMOps与可观测性、云托管、企业流程自动化、API网关与权限审计。",
+      "beginnerOpportunity": "用Dify搭一个资料问答或自动日报工作流，再用CLI Agent做代码库体检；重点学习提示词、工具调用、评测与权限控制。"
     },
     {
-      "title": "03. Agent基础设施与低代码工作流",
+      "title": "03. AI训练数据与专家数据供应链",
       "horizon": "3–12 个月",
-      "heatScore": 92,
+      "heatScore": 88,
       "relatedNews": [
-        "Hermes-Agent登顶GitHub趋势",
-        "Dify低代码工作流持续霸榜",
-        "AI CLI工具七强混战"
+        "编码数据市场爆发：前沿实验室如何买数据",
+        "AI训练数据市场交易：独家溢价与非独家折扣"
       ],
-      "coreLogic": "Agent从一次性对话转向持久记忆和自我改进，CLI与低代码平台降低构建门槛；企业需要可自托管、可观测、多模型路由的Agent栈，工具层竞争进入白热化。",
-      "beneficiaries": "Agent框架、LLM API、工作流编排、CLI工具、记忆存储、可观测性",
-      "beginnerOpportunity": "用Dify搭建业务Agent，或用hermes-agent做个人助手，积累可复用的行业工作流模板。"
+      "coreLogic": "高质量编码数据出现独家溢价、非独家折扣和小试点放大机制，数据从爬取素材变成有定价、有排他条款、有专家标注的供应链；模型竞争部分转向数据质量、版权合规与评测能力。",
+      "beneficiaries": "数据标注与专家网络、版权合规、合成数据、评测基准、垂直行业数据服务商。",
+      "beginnerOpportunity": "在熟悉领域做高质量评测集或专家标注小队，开发去重、难度分级和来源标注工具，先证明小数据包能提升模型表现。"
     },
     {
-      "title": "04. 上下文工程与推理增强",
+      "title": "04. Agent安全与算力供应链风控",
       "horizon": "6–18 个月",
       "heatScore": 86,
       "relatedNews": [
-        "LLM作为上下文工程师",
-        "DART多样替代推理轨迹"
+        "Markdown不是防火墙：编码Agent规则文件测试",
+        "英伟达暂停向东南亚部分国家出货AI服务器"
       ],
-      "coreLogic": "模型能力趋同后，上下文构造和后训练数据多样性成为性能杠杆；自动上下文工程和轨迹挖掘把手工提示变成可复用资产，推理增强从“堆算力”转向“优数据”。",
-      "beneficiaries": "提示管理、记忆系统、推理模型、教育智能体、评测服务",
-      "beginnerOpportunity": "建立行业上下文卡片库，做提示模板和评测小工具，帮助团队把经验沉淀为可复用资产。"
+      "coreLogic": "Agent权限扩大后，Markdown规则和提示词无法替代运行时门禁，安全需要只读权限、隐藏测试、审计日志与红队评测；同时芯片出口管制使算力供应链区域化，企业需准备双轨安全与算力预案。",
+      "beneficiaries": "AI安全评测、权限管理、代码审计、合规咨询、区域云与国产算力。",
+      "beginnerOpportunity": "学习Agent权限最小化、红队提示和审计日志，为企业制作安全检查清单；也可关注区域算力迁移与合规咨询的入门岗位。"
     }
   ],
   "workshops": [
     {
       "id": "w1",
-      "toolName": "Dify 低代码工作流",
-      "tag": "零门槛 · 10分钟搭出AI工作流",
-      "problem": "想把重复任务自动化但不会写代码。",
-      "analogy": "像搭积木一样拼出一个AI员工：把查资料、写答案、发邮件等积木拖到一起就能跑。",
-      "promptLabel": "一键复制 · Docker启动命令",
-      "copyText": "git clone https://github.com/langgenius/dify.git\ncd dify/docker\ncp .env.example .env\ndocker compose up -d\n# 启动后访问 http://localhost:3000",
+      "toolName": "Dify低代码Agent工作流",
+      "tag": "零门槛 · 10分钟上手",
+      "problem": "想把资料问答或行业早报自动化，但不会写后端和前端。",
+      "analogy": "像拼乐高：把检索、回答、判断三块积木连起来，就能跑一个AI应用。",
+      "promptLabel": "一键复制 · Dify工作流设计Prompt",
+      "copyText": "你是我的AI工作流设计师。请把「自动整理行业早报」拆成Dify工作流节点：1）输入关键词；2）检索我上传的3份资料；3）生成5条摘要并附来源；4）若检索不到就输出“需人工补充”。请给出每个节点的输入、输出和提示词。",
       "steps": [
-        "安装Docker并执行上方命令启动Dify",
-        "在控制台新建工作流，接入LLM和知识库，拖入开始-检索-生成-结束节点",
-        "在调试面板测试问题，发布为网页或API分享给同事"
+        "打开Dify新建应用，上传3份公开PDF或网页资料建立知识库。",
+        "把上面的Prompt粘贴到LLM节点，按检索、回答、来源引用三步连线。",
+        "用5个真实问题测试，记录答错的问题并调整分段大小和提示词。"
       ],
       "link": "https://github.com/langgenius/dify"
     },
     {
       "id": "w2",
-      "toolName": "Hermes-Agent 自进化助手",
-      "tag": "零门槛 · 15分钟上手",
-      "problem": "想要一个会记住偏好、越用越顺手的个人Agent。",
-      "analogy": "像带工作笔记的实习生：每次做完事都记下你的偏好，下次不用重新交代。",
-      "promptLabel": "一键复制 · 安装与运行命令",
-      "copyText": "git clone https://github.com/NousResearch/hermes-agent.git\ncd hermes-agent\npip install -r requirements.txt\nexport OPENAI_API_KEY=\"你的API Key\"\npython main.py",
+      "toolName": "AI CLI编码Agent代码库体检",
+      "tag": "零门槛 · 5分钟上手",
+      "problem": "接手陌生代码库不知道从哪看，怕Agent乱改文件。",
+      "analogy": "像请一位只读的资深工程师先帮你画地图，不动手只标风险。",
+      "promptLabel": "一键复制 · 代码库体检Prompt",
+      "copyText": "请以只读模式扫描当前仓库：1）列出目录结构和入口文件；2）标出5个高风险文件；3）给出3条最小修改建议；4）不要修改任何文件。输出格式为：结构概览、高风险文件、建议、需要人工确认的问题。",
       "steps": [
-        "克隆仓库并按README安装依赖，配置LLM API Key",
-        "运行示例Agent，给它一个重复性任务并允许它记录偏好",
-        "第二次运行同一任务，检查它是否调用历史记忆减少你的指令"
+        "在项目根目录启动Claude Code、Codex CLI或Gemini CLI等任意CLI Agent。",
+        "粘贴上面的Prompt，确认它处于只读模式后执行。",
+        "检查它列出的高风险文件是否准确，再决定是否开放单个文件的写权限。"
       ],
-      "link": "https://github.com/NousResearch/hermes-agent"
+      "link": "https://github.com/duanyytop/agents-radar/issues/4518"
     },
     {
       "id": "w3",
-      "toolName": "上下文卡片法",
-      "tag": "零门槛 · 5分钟上手",
-      "problem": "提示词每次重写、经验不沉淀、跨任务迁移差。",
-      "analogy": "让AI自己整理错题本：把做过的任务总结成下次可翻看的卡片。",
-      "promptLabel": "一键复制 · 上下文卡片提炼模板",
-      "copyText": "你是我的上下文工程师。请针对任务【填写任务】执行以下步骤：\n1. 先给出执行计划并完成一次；\n2. 复盘本次成功/失败原因；\n3. 提炼3-5条可复用“上下文卡片”，每条包含：适用场景、规则、示例、禁忌；\n4. 输出为Markdown表格，方便我下次直接粘贴。",
+      "toolName": "Agent权限门禁清单",
+      "tag": "零门槛 · 15分钟上手",
+      "problem": "担心编码Agent绕过规则、乱改配置或跳过测试。",
+      "analogy": "门禁卡加监控，不是门口贴一张请勿进入的纸条。",
+      "promptLabel": "一键复制 · Agent安全边界模板",
+      "copyText": "# Agent安全边界\n- 只允许修改src/下文件\n- 禁止修改.env、CI配置和数据库迁移\n- 每次修改后必须运行pytest\n- 若测试失败，回滚并说明原因\n\n请检查以上规则是否被违反，并输出：违反项、证据文件、建议的运行时门禁。",
       "steps": [
-        "把模板中的【填写任务】替换成你反复要做的事，让LLM执行并复盘",
-        "保存它输出的上下文卡片表格",
-        "新任务中只贴入这些卡片，对比无卡片时的准确率与耗时"
+        "把上面的规则保存为仓库根目录的AGENT_RULES.md，并给Agent只读权限先试跑。",
+        "在CI中加入隐藏测试和禁止修改清单，让越界修改直接失败。",
+        "用一句诱导性提示测试Agent是否会绕过规则，再补权限和审计日志。"
       ],
-      "link": "https://huggingface.co/papers/2611.30494"
+      "link": "https://huggingface.co/papers/2611.27112"
     },
     {
       "id": "w4",
-      "toolName": "Gemini CLI 终端助手",
-      "tag": "零门槛 · 5分钟上手",
-      "problem": "想在终端里让AI直接读写代码、修bug，但不想配置复杂IDE插件。",
-      "analogy": "给终端装一个会看文件的AI副驾：你说人话，它在命令行里帮你改代码。",
-      "promptLabel": "一键复制 · 安装并启动命令",
-      "copyText": "npm install -g @google/gemini-cli\ngemini\n# 登录后输入：读取当前目录README，并生成一个示例函数",
+      "toolName": "多模态空间记忆卡",
+      "tag": "零门槛 · 10分钟上手",
+      "problem": "机器人或Agent换个房间就失忆，每次都要重新描述环境。",
+      "analogy": "给AI建一本会更新的房间笔记，下次进门先翻笔记。",
+      "promptLabel": "一键复制 · 空间记忆卡Prompt",
+      "copyText": "请根据我提供的5张房间照片，生成一张空间记忆卡：1）列出5个关键物体及相对位置；2）标出可通行路线和3个禁忌区域；3）用JSON输出，字段为object、position、route、forbidden、last_updated；4）对不确定项标注“待确认”。",
       "steps": [
-        "安装Node.js后执行上方npm安装命令",
-        "运行gemini并完成登录授权",
-        "在一个测试代码目录中让它“读取README并生成一个函数”，检查生成结果"
+        "用手机拍5张房间或工位照片，覆盖入口、主要物体和通道。",
+        "把照片上传到多模态模型，粘贴上面的Prompt生成JSON记忆卡。",
+        "保存JSON，下次让Agent先读取记忆卡再规划路线，并手动修正待确认项。"
       ],
-      "link": "https://github.com/duanyytop/agents-radar/issues/4518"
+      "link": "https://www.qbitai.com/2026/11/513227.html"
     }
   ]
 }
