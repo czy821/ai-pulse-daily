@@ -315,6 +315,18 @@
 
         <!-- Source Filter Pills -->
         <div id="sourceFilters" class="flex flex-wrap items-center gap-2 pt-1"></div>
+
+        <!-- News Bookmark Date Filter Bar (Visible in Bookmark View) -->
+        <div id="newsBookmarkDateBar" class="hidden pt-2.5 border-t border-stone-400/20 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-semibold text-amber-800 dark:text-amber-300 flex items-center gap-1">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>按日期检索收藏：
+            </span>
+            <input id="newsBookmarkDateInput" type="date" class="px-2.5 py-1 rounded-lg border border-stone-400/30 focus:border-amber-500 focus:outline-none text-xs theme-input" />
+            <button id="clearNewsBookmarkDateBtn" class="hidden px-2 py-1 rounded-lg surface-soft hover:bg-amber-500/15 text-body-secondary transition">清空日期</button>
+          </div>
+          <div id="newsBookmarkDatePills" class="flex flex-wrap items-center gap-1.5"></div>
+        </div>
       </div>
 
       <!-- News + Sidebar Grid -->
@@ -407,6 +419,16 @@
             <input id="importForesightInput" type="file" accept=".json" class="hidden" />
           </label>
         </div>
+        <div id="foresightBookmarkDateBar" class="hidden w-full pt-2.5 border-t border-stone-400/20 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-semibold text-amber-800 dark:text-amber-300 flex items-center gap-1">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>按日期检索产业前瞻收藏：
+            </span>
+            <input id="foresightBookmarkDateInput" type="date" class="px-2.5 py-1 rounded-lg border border-stone-400/30 focus:border-amber-500 focus:outline-none text-xs theme-input" />
+            <button id="clearForesightBookmarkDateBtn" class="hidden px-2 py-1 rounded-lg surface-soft hover:bg-amber-500/15 text-body-secondary transition">清空日期</button>
+          </div>
+          <div id="foresightBookmarkDatePills" class="flex flex-wrap items-center gap-1.5"></div>
+        </div>
       </div>
 
       <!-- 4 Industry Foresight Cards -->
@@ -451,6 +473,16 @@
             <span>导入存档</span>
             <input id="importWorkshopInput" type="file" accept=".json" class="hidden" />
           </label>
+        </div>
+        <div id="workshopBookmarkDateBar" class="hidden w-full pt-2.5 border-t border-stone-400/20 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-semibold text-teal-800 dark:text-teal-300 flex items-center gap-1">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>按日期检索小白工坊收藏：
+            </span>
+            <input id="workshopBookmarkDateInput" type="date" class="px-2.5 py-1 rounded-lg border border-stone-400/30 focus:border-amber-500 focus:outline-none text-xs theme-input" />
+            <button id="clearWorkshopBookmarkDateBtn" class="hidden px-2 py-1 rounded-lg surface-soft hover:bg-amber-500/15 text-body-secondary transition">清空日期</button>
+          </div>
+          <div id="workshopBookmarkDatePills" class="flex flex-wrap items-center gap-1.5"></div>
         </div>
       </div>
 
@@ -954,6 +986,9 @@ if __name__ == "__main__":
       onlyBookmarked: false,
       onlyBookmarkedForesight: false,
       onlyBookmarkedWorkshop: false,
+      newsBookmarkDate: '',
+      foresightBookmarkDate: '',
+      workshopBookmarkDate: '',
       readIds: new Set(),          // 按当前期号独立存储，每日更新自动重置
       savedBookmarks: [],          // 跨日期持久保存完整资讯快照，不被新资讯覆盖
       savedForesights: [],         // 跨日期持久保存产业前瞻快照
@@ -971,6 +1006,67 @@ if __name__ == "__main__":
       const raw = String(editionDateStr || BRIEFING_DATA.editionDate || 'default');
       const m = raw.match(/\d{4}年\d{1,2}月\d{1,2}日|\d{4}-\d{2}-\d{2}/);
       return m ? m[0] : raw.slice(0, 24);
+    }
+
+    function normalizeDateISO(raw) {
+      const s = String(raw || '').trim();
+      const cn = s.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      if (cn) {
+        return `${cn[1]}-${String(cn[2]).padStart(2, '0')}-${String(cn[3]).padStart(2, '0')}`;
+      }
+      const iso = s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if (iso) {
+        return `${iso[1]}-${String(iso[2]).padStart(2, '0')}-${String(iso[3]).padStart(2, '0')}`;
+      }
+      return '';
+    }
+
+    function getBookmarkItemDateISO(item) {
+      if (!item) return '';
+      return normalizeDateISO(item.savedEdition) || normalizeDateISO(item.publishedAt) || '';
+    }
+
+    function renderBookmarkDateBar(scope, savedList, selectedDate, isVisible) {
+      const bar = document.getElementById(`${scope}BookmarkDateBar`);
+      const input = document.getElementById(`${scope}BookmarkDateInput`);
+      const clearBtn = document.getElementById(`clear${scope.charAt(0).toUpperCase() + scope.slice(1)}BookmarkDateBtn`);
+      const pills = document.getElementById(`${scope}BookmarkDatePills`);
+      if (!bar || !input || !clearBtn || !pills) return;
+
+      if (!isVisible) {
+        bar.classList.add('hidden');
+        return;
+      }
+      bar.classList.remove('hidden');
+      input.value = selectedDate || '';
+      if (selectedDate) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+
+      const counts = {};
+      savedList.forEach(it => {
+        const d = getBookmarkItemDateISO(it);
+        if (d) counts[d] = (counts[d] || 0) + 1;
+      });
+      const dates = Object.keys(counts).sort().reverse();
+      if (dates.length === 0) {
+        pills.innerHTML = '<span class="text-body-muted">暂无日期记录</span>';
+        return;
+      }
+      const allBtn = `
+        <button data-bm-date-scope="${scope}" data-bm-date="" class="bm-date-pill px-2.5 py-1 rounded-lg border transition ${
+          !selectedDate
+            ? 'bg-amber-500/15 border-amber-500/60 text-amber-900 dark:text-amber-200 font-semibold'
+            : 'border-stone-400/25 text-body-secondary hover:border-amber-500/45'
+        }">全部日期 (${savedList.length})</button>
+      `;
+      const dateBtns = dates.slice(0, 8).map(d => `
+        <button data-bm-date-scope="${scope}" data-bm-date="${d}" class="bm-date-pill px-2.5 py-1 rounded-lg border font-mono transition ${
+          selectedDate === d
+            ? 'bg-amber-500/15 border-amber-500/60 text-amber-900 dark:text-amber-200 font-semibold'
+            : 'border-stone-400/25 text-body-secondary hover:border-amber-500/45'
+        }">${d} (${counts[d]})</button>
+      `).join('');
+      pills.innerHTML = allBtn + dateBtns;
     }
 
     function getItemKey(item) {
@@ -1245,6 +1341,7 @@ if __name__ == "__main__":
       const base = state.onlyBookmarked ? state.savedBookmarks : getModeItems();
       return base.filter(item => {
         if (!state.onlyBookmarked && state.selectedSource !== 'all' && item.source !== state.selectedSource) return false;
+        if (state.onlyBookmarked && state.newsBookmarkDate && getBookmarkItemDateISO(item) !== state.newsBookmarkDate) return false;
         if (state.selectedSignal !== 'all' && item.signal !== state.selectedSignal) return false;
         if (state.searchQuery.trim()) {
           const q = state.searchQuery.trim().toLowerCase();
@@ -1314,6 +1411,7 @@ if __name__ == "__main__":
     }
 
     function renderNewsList() {
+      renderBookmarkDateBar('news', state.savedBookmarks, state.newsBookmarkDate, state.onlyBookmarked);
       const items = getFilteredItems();
       const totalFilteredMins = items.reduce((s, i) => s + (Number(i.readMinutes) || 2), 0);
       const statsLabel = state.onlyBookmarked
@@ -1406,7 +1504,10 @@ if __name__ == "__main__":
       const bmCountEl = document.getElementById('foresightBookmarkCount');
       if (bmCountEl) bmCountEl.textContent = state.savedForesights.length;
 
-      const list = state.onlyBookmarkedForesight ? state.savedForesights : FORESIGHT_TRACKS;
+      renderBookmarkDateBar('foresight', state.savedForesights, state.foresightBookmarkDate, state.onlyBookmarkedForesight);
+      const list = state.onlyBookmarkedForesight
+        ? state.savedForesights.filter(t => !state.foresightBookmarkDate || getBookmarkItemDateISO(t) === state.foresightBookmarkDate)
+        : FORESIGHT_TRACKS;
       const labelEl = document.getElementById('foresightListLabel');
       if (labelEl) {
         labelEl.textContent = state.onlyBookmarkedForesight
@@ -1478,7 +1579,10 @@ if __name__ == "__main__":
       const bmCountEl = document.getElementById('workshopBookmarkCount');
       if (bmCountEl) bmCountEl.textContent = state.savedWorkshops.length;
 
-      const list = state.onlyBookmarkedWorkshop ? state.savedWorkshops : WORKSHOPS;
+      renderBookmarkDateBar('workshop', state.savedWorkshops, state.workshopBookmarkDate, state.onlyBookmarkedWorkshop);
+      const list = state.onlyBookmarkedWorkshop
+        ? state.savedWorkshops.filter(w => !state.workshopBookmarkDate || getBookmarkItemDateISO(w) === state.workshopBookmarkDate)
+        : WORKSHOPS;
       const labelEl = document.getElementById('workshopListLabel');
       if (labelEl) {
         labelEl.textContent = state.onlyBookmarkedWorkshop
@@ -1777,6 +1881,22 @@ if __name__ == "__main__":
           switchTab(gotoBtn.dataset.gotoTab);
           return;
         }
+        const bmDateBtn = e.target.closest('.bm-date-pill');
+        if (bmDateBtn) {
+          const scope = bmDateBtn.dataset.bmDateScope;
+          const dateVal = bmDateBtn.dataset.bmDate || '';
+          if (scope === 'news') {
+            state.newsBookmarkDate = dateVal;
+            renderNewsList();
+          } else if (scope === 'foresight') {
+            state.foresightBookmarkDate = dateVal;
+            renderForesight();
+          } else if (scope === 'workshop') {
+            state.workshopBookmarkDate = dateVal;
+            renderWorkshop();
+          }
+          return;
+        }
         const srcBtn = e.target.closest('.source-pill');
         if (srcBtn) {
           state.onlyBookmarked = false;
@@ -1905,6 +2025,31 @@ if __name__ == "__main__":
           persistState();
           renderWorkshop();
         }
+      });
+
+      document.getElementById('newsBookmarkDateInput').addEventListener('change', e => {
+        state.newsBookmarkDate = e.target.value || '';
+        renderNewsList();
+      });
+      document.getElementById('clearNewsBookmarkDateBtn').addEventListener('click', () => {
+        state.newsBookmarkDate = '';
+        renderNewsList();
+      });
+      document.getElementById('foresightBookmarkDateInput').addEventListener('change', e => {
+        state.foresightBookmarkDate = e.target.value || '';
+        renderForesight();
+      });
+      document.getElementById('clearForesightBookmarkDateBtn').addEventListener('click', () => {
+        state.foresightBookmarkDate = '';
+        renderForesight();
+      });
+      document.getElementById('workshopBookmarkDateInput').addEventListener('change', e => {
+        state.workshopBookmarkDate = e.target.value || '';
+        renderWorkshop();
+      });
+      document.getElementById('clearWorkshopBookmarkDateBtn').addEventListener('click', () => {
+        state.workshopBookmarkDate = '';
+        renderWorkshop();
       });
 
       document.getElementById('searchInput').addEventListener('input', e => {
